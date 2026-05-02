@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
-export function Hero() {
+export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const scrollToPortfolio = () => {
     const element = document.querySelector("#portfolio");
     if (element) {
@@ -28,7 +28,7 @@ export function Hero() {
       <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center mt-20">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="font-sans text-sm md:text-base uppercase tracking-[0.2em] text-white/90 mb-6"
         >
@@ -37,7 +37,7 @@ export function Hero() {
         
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-12 max-w-4xl leading-tight"
         >
@@ -46,10 +46,10 @@ export function Hero() {
 
         <motion.button
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           onClick={scrollToPortfolio}
-          className="border border-white text-white px-8 py-4 uppercase tracking-wider text-sm font-sans hover:bg-white hover:text-[#2C2C2C] transition-all duration-500"
+          className="border border-white text-white px-8 py-4 uppercase tracking-wider text-sm font-sans hover:bg-white hover:text-[#2C2C2C] transition-all duration-500 cursor-hover"
         >
           Explore Our Work
         </motion.button>
@@ -58,7 +58,7 @@ export function Hero() {
       {/* Scroll Indicator */}
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={introComplete ? { opacity: 1 } : { opacity: 0 }}
         transition={{ delay: 1.2, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70 flex flex-col items-center gap-2"
       >

@@ -1,0 +1,220 @@
+ADVANCED ANIMATIONS & VISUAL EFFECTS — ADD TO ENTIRE WEBSITE
+
+GLOBAL SETUP — ADD THESE LIBRARIES IN THE <head>:
+Google Fonts — already added
+AOS (Animate on Scroll): <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js"></script> and its CSS link
+GSAP: <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+GSAP ScrollTrigger: <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+Vanilla Tilt: <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
+1. BACKGROUND PARALLAX EFFECT (like the images you shared)
+Exactly like your reference — full background image that moves slower than the content as you scroll, with a white/cream content box floating on top:
+Every section should use this structure:
+- Outer div: position relative, full width, min-height 100vh, background image fixed (background-attachment: fixed), background-size: cover, background-position: center
+- Inner content box: position relative, z-index 2, background white or cream (#F9F5F0), max-width 750px, margin: 0 auto, padding 60px, border-radius 4px
+- This creates the exact floating white box on top of parallax image effect from your screenshots
+
+Use GSAP ScrollTrigger to enhance this:
+gsap.to(".bg-image-section", { backgroundPositionY: "30%", ease: "none", scrollTrigger: { trigger: ".bg-image-section", start: "top bottom", end: "bottom top", scrub: true } })
+
+2. PAGE LOAD ANIMATION — LUXURY INTRO SEQUENCE
+When the website first loads:
+- Black or cream full-screen overlay appears first
+- Studio name "Nivora Interiors" types itself out letter by letter in the centre (typewriter effect) using GSAP
+- After 1.5 seconds, overlay slides UP and disappears revealing the hero section
+- Hero image fades in slowly from slightly zoomed in (scale 1.1) to normal (scale 1.0) over 1.2 seconds
+- Headline text slides up from below with opacity 0 to 1
+- CTA button fades in last with a slight delay
+
+Code approach:
+gsap.timeline()
+  .from(".hero-title", { y: 60, opacity: 0, duration: 1.2, ease: "power3.out" })
+  .from(".hero-subtitle", { y: 40, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.8")
+  .from(".hero-cta", { y: 30, opacity: 0, duration: 0.8 }, "-=0.6")
+
+3. SMOOTH HORIZONTAL TEXT MARQUEE (Trending 2025)
+Add a running text strip between sections — like luxury fashion websites:
+- A full-width horizontal strip with slow auto-scrolling text
+- Text repeating: "Nivora Interiors  ✦  Interior Design  ✦  Mumbai  ✦  Luxury Spaces  ✦  Your Vision  ✦  Our Craft  ✦"
+- Direction: left to right, infinitely looping
+- Font: serif, letter-spacing wide, muted colour (terracotta or charcoal)
+- Background: cream or very light tone
+- Add this strip between: Hero and Intro section, and between Services and Portfolio section
+
+CSS animation:
+@keyframes marquee { 0% { transform: translateX(0) } 100% { transform: translateX(-50%) } }
+.marquee-inner { display: flex; width: 200%; animation: marquee 20s linear infinite; }
+
+4. STAGGERED CARD REVEAL ON SCROLL
+For project cards, service items, and testimonial cards:
+- Cards start invisible and slightly below their position (translateY: 50px, opacity: 0)
+- As user scrolls to that section, cards animate in one by one with a stagger delay of 0.15s each
+- Smooth ease-out motion
+
+Using AOS on each card:
+data-aos="fade-up" data-aos-delay="0" on first card
+data-aos="fade-up" data-aos-delay="150" on second card
+data-aos="fade-up" data-aos-delay="300" on third card
+
+Or using GSAP:
+gsap.from(".project-card", { y: 50, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power2.out",
+scrollTrigger: { trigger: ".projects-grid", start: "top 80%" } })
+
+5. IMAGE HOVER — SMOOTH ZOOM + OVERLAY SLIDE UP
+For all project cards and portfolio images:
+- On hover: image smoothly zooms in to scale(1.08) with transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+- Simultaneously: dark overlay slides UP from the bottom (translateY: 100% to translateY: 0) over the image
+- Overlay contains project name, location, style tag — all in white
+- Text inside overlay fades in with a slight upward movement
+
+CSS:
+.card-overlay { position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(44,44,44,0.85); transform: translateY(100%); transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.project-card:hover .card-overlay { transform: translateY(0); }
+.project-card img { transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.project-card:hover img { transform: scale(1.08); }
+
+6. 3D TILT EFFECT ON CARDS (Trending)
+Apply on featured project cards and testimonial cards:
+Using Vanilla Tilt library:
+VanillaTilt.init(document.querySelectorAll(".project-card"), {
+  max: 8,
+  speed: 400,
+  glare: true,
+  "max-glare": 0.2,
+  scale: 1.03
+})
+
+This makes cards subtly tilt in 3D based on mouse position — very premium feel
+Keep max tilt low (8 degrees) so it stays elegant not gimmicky
+
+7. SPLIT TEXT HEADLINE ANIMATION
+For all section headings (Selected Work, What We Do, Our Story etc.):
+- Each heading splits into individual words
+- Words animate in from below, one by one, with stagger
+- Feels like words are being "written" onto the screen
+
+Using GSAP:
+Split each heading word into a span
+gsap.from(".section-title span", { y: 80, opacity: 0, duration: 0.7, stagger: 0.1, ease: "power3.out",
+scrollTrigger: { trigger: ".section-title", start: "top 85%" } })
+
+Apply to: every h2 heading on the page
+
+8. COUNTING NUMBER ANIMATION
+For any stats or numbers on the page (example: "50+ Projects Completed", "7 Years Experience", "200+ Happy Clients"):
+- Numbers count up from 0 to final value when scrolled into view
+- Duration: 2 seconds, easing: ease-out
+
+Add a stats bar section between About and Services with 3–4 numbers:
+- Projects Completed: 50+
+- Years of Experience: 7
+- Cities Served: 12
+- Happy Clients: 200+
+
+Using GSAP or vanilla JS counter:
+function animateCounter(el, target) {
+  let count = 0;
+  const increment = target / 80;
+  const timer = setInterval(() => {
+    count += increment;
+    if (count >= target) { el.textContent = target + "+"; clearInterval(timer); }
+    else { el.textContent = Math.floor(count); }
+  }, 25);
+}
+
+9. HORIZONTAL SCROLL SECTION (Very Trending 2025)
+For the portfolio / projects section:
+- Instead of a vertical grid, projects scroll HORIZONTALLY as user scrolls DOWN
+- User scrolls down with mouse wheel but content moves left to right
+- Pin the section in place while horizontal scroll happens
+- After all projects have passed, normal vertical scroll resumes
+
+Using GSAP ScrollTrigger horizontal scroll:
+gsap.to(".projects-track", {
+  x: () => -(document.querySelector(".projects-track").scrollWidth - window.innerWidth),
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".projects-container",
+    pin: true,
+    scrub: 1,
+    end: () => "+=" + document.querySelector(".projects-track").scrollWidth
+  }
+})
+
+Note: Keep a vertical grid as fallback for mobile
+
+10. SMOOTH CURSOR EFFECT (Luxury Website Staple)
+Custom cursor that replaces the default browser cursor:
+- Small filled circle (8px) follows cursor exactly
+- Larger hollow ring (40px) follows with a slight lag/delay — trailing effect
+- On hover over images or buttons: large ring expands to 70px and changes colour to terracotta
+- On hover over links: cursor inverts colour
+
+HTML: Add two divs at top of body:
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+CSS:
+.cursor-dot { width: 8px; height: 8px; background: #2C2C2C; border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.1s; }
+.cursor-ring { width: 40px; height: 40px; border: 1.5px solid #C4856A; border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: transform 0.12s ease, width 0.3s ease, height 0.3s ease; }
+
+JS: Track mousemove and update positions. On hover of .project-card or button: add class that enlarges .cursor-ring
+Only show on desktop — hide on touch devices (pointer: coarse)
+
+11. SMOOTH PAGE SCROLL (Lenis)
+Replace browser default scroll with buttery smooth scroll:
+Add Lenis smooth scroll library:
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.0.42/lenis.min.js"></script>
+
+Initialize:
+const lenis = new Lenis({ duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smooth: true })
+function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf)
+
+Connect with GSAP ScrollTrigger:
+lenis.on('scroll', ScrollTrigger.update)
+gsap.ticker.add((time) => { lenis.raf(time * 1000) })
+
+This makes the ENTIRE website scroll feel like butter — huge premium upgrade
+
+12. IMAGE REVEAL ON SCROLL (Curtain Effect)
+For the About section and any large single images:
+- Image is hidden behind a solid colour block (same as background colour)
+- As user scrolls to the image, the colour block slides away LEFT revealing the image underneath
+- Feels like a curtain being pulled back
+
+Using GSAP:
+.image-wrapper { position: relative; overflow: hidden; }
+.image-curtain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #C4856A; z-index: 2; transform-origin: right; }
+
+gsap.to(".image-curtain", { scaleX: 0, duration: 1.2, ease: "power4.inOut",
+scrollTrigger: { trigger: ".image-wrapper", start: "top 70%" } })
+
+13. NAV SCROLL BEHAVIOUR
+- On page load: nav is transparent, text white (over hero image)
+- On scroll down past 80px: nav background transitions to cream/white with subtle shadow, text turns charcoal
+- Smooth transition: transition: all 0.4s ease
+- Active nav link underlines with a thin terracotta line that slides in from left
+
+JS:
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 80) { nav.classList.add('scrolled'); }
+  else { nav.classList.remove('scrolled'); }
+})
+
+14. FOOTER REVEAL EFFECT
+- Footer starts hidden below the last section
+- As user reaches the bottom of the page, footer slides up from below into view
+- Last section has position: relative, z-index 2 with white background
+- Footer has position: sticky, bottom: 0, z-index: 1 — creates a natural reveal as last section scrolls away
+
+This is a very trending effect on luxury websites right now
+
+IMPORTANT NOTES FOR REPLIT:
+
+Initialize AOS with: AOS.init({ duration: 900, once: true, offset: 80 }) at bottom of script
+Register GSAP ScrollTrigger with: gsap.registerPlugin(ScrollTrigger) at top of script
+All animations should be disabled / simplified on mobile (max-width 768px) using window.innerWidth checks — heavy animations on mobile kill performance
+Add will-change: transform on animated elements for GPU acceleration
+Test each animation individually and make sure nothing overlaps or conflicts

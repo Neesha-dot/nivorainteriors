@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SiWhatsapp } from "react-icons/si";
+import { AnimatedHeading } from "./AnimatedHeading";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Name must be at least 2 characters"),
@@ -49,7 +50,7 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-white" ref={ref}>
+    <section id="contact" className="relative z-10 py-24 md:py-32 bg-[#F9F5F0]" ref={ref}>
       <div className="container mx-auto px-6 md:px-12 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -57,7 +58,7 @@ export function ContactForm() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-6">Let's Start Your Project</h2>
+          <AnimatedHeading text="Let's Start Your Project" className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-6" />
           <div className="w-16 h-px bg-[#C4856A] mx-auto"></div>
         </motion.div>
 
@@ -67,12 +68,12 @@ export function ContactForm() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           {isSuccess ? (
-            <div className="bg-[#F9F5F0] p-12 text-center border border-[#C4856A]/20">
+            <div className="bg-white p-12 text-center border border-[#C4856A]/20">
               <h3 className="font-serif text-3xl text-[#2C2C2C] mb-4">Thank you for reaching out</h3>
               <p className="font-sans text-[#2C2C2C]/70">We have received your enquiry and will be in touch shortly.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 bg-white p-8 md:p-12 shadow-sm border border-[#2C2C2C]/5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/70">Full Name *</label>
@@ -164,7 +165,7 @@ export function ContactForm() {
                 <button 
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full md:w-auto px-12 py-4 bg-[#C4856A] text-white font-sans text-sm uppercase tracking-wider hover:bg-[#b0745b] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="w-full md:w-auto px-12 py-4 bg-[#C4856A] text-white font-sans text-sm uppercase tracking-wider hover:bg-[#b0745b] transition-colors disabled:opacity-70 disabled:cursor-not-allowed cursor-hover"
                 >
                   {isSubmitting ? "Sending..." : "Send Enquiry"}
                 </button>
@@ -173,7 +174,7 @@ export function ContactForm() {
                   href="https://wa.me/919999999999?text=Hi!%20I'm%20interested%20in%20interior%20design%20services.%20Can%20we%20discuss%20my%20project%3F"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 text-[#2C2C2C]/70 hover:text-[#25D366] transition-colors font-sans text-sm"
+                  className="group flex items-center gap-2 text-[#2C2C2C]/70 hover:text-[#25D366] transition-colors font-sans text-sm cursor-hover"
                 >
                   Or chat with us on WhatsApp
                   <SiWhatsapp className="group-hover:translate-x-1 transition-transform" />

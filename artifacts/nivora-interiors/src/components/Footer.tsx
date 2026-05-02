@@ -16,13 +16,13 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#2C2C2C] text-[#F9F5F0] border-t-4 border-[#C4856A] pt-20 pb-8">
+    <footer className="bg-[#2C2C2C] text-[#F9F5F0] border-t-4 border-[#C4856A] pt-20 pb-8 sticky bottom-0 z-[1] w-full">
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 mb-16 border-b border-white/10 pb-16">
           
           {/* Brand */}
           <div className="flex flex-col items-start md:items-start">
-            <a href="#home" onClick={scrollToTop} className="font-serif text-3xl mb-4 text-white">
+            <a href="#home" onClick={scrollToTop} className="font-serif text-3xl mb-4 text-white cursor-hover">
               Nivora Interiors
             </a>
             <p className="font-sans text-white/60 text-sm italic">
@@ -38,7 +38,7 @@ export function Footer() {
                   key={item}
                   href={`#${item.toLowerCase()}`}
                   onClick={(e) => scrollToSection(e, `#${item.toLowerCase()}`)}
-                  className="font-sans text-sm uppercase tracking-widest text-white/70 hover:text-[#C4856A] transition-colors"
+                  className="font-sans text-sm uppercase tracking-widest text-white/70 hover:text-[#C4856A] transition-colors cursor-hover"
                 >
                   {item}
                 </a>
@@ -59,7 +59,7 @@ export function Footer() {
                 href="https://instagram.com/nivorainteriors" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-white transition-colors"
+                className="text-white/70 hover:text-white transition-colors cursor-hover"
               >
                 <SiInstagram size={20} />
               </a>
@@ -67,7 +67,7 @@ export function Footer() {
                 href="https://wa.me/919999999999" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white/70 hover:text-[#25D366] transition-colors"
+                className="text-white/70 hover:text-[#25D366] transition-colors cursor-hover"
               >
                 <SiWhatsapp size={20} />
               </a>

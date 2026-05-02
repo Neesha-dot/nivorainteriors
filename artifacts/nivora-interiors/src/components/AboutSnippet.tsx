@@ -1,11 +1,35 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function AboutSnippet() {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
+
+  const curtainRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    if (curtainRef.current) {
+      const ctx = gsap.context(() => {
+        gsap.to(curtainRef.current, {
+          scaleX: 0,
+          duration: 1.2,
+          ease: "power4.inOut",
+          scrollTrigger: {
+            trigger: curtainRef.current,
+            start: "top 70%",
+          }
+        });
+      });
+      return () => ctx.revert();
+    }
+  }, []);
 
   return (
     <section className="py-24 md:py-32 bg-[#F9F5F0]" ref={ref}>
@@ -16,8 +40,12 @@ export function AboutSnippet() {
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="aspect-[3/4] md:aspect-[4/5] overflow-hidden"
+            className="relative aspect-[3/4] md:aspect-[4/5] overflow-hidden"
           >
+            <div 
+              ref={curtainRef}
+              className="absolute inset-0 bg-[#C4856A] z-10 origin-right"
+            />
             <img
               src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
               alt="Nivora Interiors Studio"
@@ -40,7 +68,7 @@ export function AboutSnippet() {
             </p>
             <a
               href="#about"
-              className="group flex items-center gap-2 text-[#C4856A] font-sans font-medium uppercase tracking-wider text-sm"
+              className="group flex items-center gap-2 text-[#C4856A] font-sans font-medium uppercase tracking-wider text-sm cursor-hover"
               onClick={(e) => {
                 e.preventDefault();
                 const el = document.querySelector("#about");

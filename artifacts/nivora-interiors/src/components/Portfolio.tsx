@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { AnimatedHeading } from "./AnimatedHeading";
 
 const CATEGORIES = ["All", "Living Room", "Bedroom", "Kitchen", "Office", "Full Home", "Commercial"];
 
@@ -125,6 +128,38 @@ export function Portfolio() {
     threshold: 0.1,
   });
 
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    let ctx: gsap.Context;
+
+    if (window.innerWidth >= 1024 && scrollContainerRef.current && trackRef.current) {
+      ctx = gsap.context(() => {
+        const track = trackRef.current!;
+        const scrollWidth = track.scrollWidth - window.innerWidth;
+        
+        gsap.to(track, {
+          x: -scrollWidth,
+          ease: "none",
+          scrollTrigger: {
+            trigger: scrollContainerRef.current,
+            pin: true,
+            scrub: 1,
+            end: () => `+=${scrollWidth}`,
+            invalidateOnRefresh: true,
+          }
+        });
+      }, scrollContainerRef);
+    }
+    
+    return () => {
+      if (ctx) ctx.revert();
+    };
+  }, [filter]); // Re-run if filter changes
+
   const filteredProjects = filter === "All" 
     ? ALL_PROJECTS 
     : ALL_PROJECTS.filter(p => p.category === filter);
@@ -144,67 +179,80 @@ export function Portfolio() {
   };
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 bg-white" ref={ref}>
-      <div className="container mx-auto px-6 md:px-12 max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col items-center mb-12"
-        >
-          <h2 className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-8">Our Work</h2>
-          
-          {/* Filters */}
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 max-w-3xl">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilter(cat)}
-                className={`font-sans text-sm uppercase tracking-widest transition-colors ${
-                  filter === cat 
-                    ? "text-[#C4856A] border-b border-[#C4856A]" 
-                    : "text-[#2C2C2C]/50 hover:text-[#2C2C2C]"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </motion.div>
+    <>
+      <section id="portfolio" className="py-24 md:py-32 bg-white" ref={ref}>
+        <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col items-center mb-12"
+          >
+            <AnimatedHeading text="Our Work" className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-8" />
+            
+            {/* Filters */}
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8 max-w-3xl">
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setFilter(cat)}
+                  className={`font-sans text-sm uppercase tracking-widest transition-colors cursor-hover ${
+                    filter === cat 
+                      ? "text-[#C4856A] border-b border-[#C4856A]" 
+                      : "text-[#2C2C2C]/50 hover:text-[#2C2C2C]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        </div>
 
-        {/* Grid */}
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence>
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                layout
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.5 }}
-                className="group cursor-pointer"
-                onClick={() => {
-                  setSelectedProject(project);
-                  setGalleryIndex(0);
-                }}
-              >
-                <div className="aspect-[4/5] overflow-hidden mb-4">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
-                </div>
-                <h3 className="font-serif text-2xl text-[#2C2C2C] mb-1">{project.title}</h3>
-                <p className="font-sans text-sm text-[#2C2C2C]/60">
-                  {project.style} — {project.location}
-                </p>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </div>
+        {/* Desktop Horizontal Scroll Container / Mobile Vertical Grid */}
+        <div ref={scrollContainerRef} className="overflow-hidden lg:pl-[calc((100vw-1280px)/2+48px)] pl-6 pr-6 w-full">
+          <motion.div 
+            ref={trackRef}
+            layout 
+            className="flex flex-col lg:flex-row gap-8 w-full lg:w-max"
+          >
+            <AnimatePresence>
+              {filteredProjects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.5 }}
+                  className="group cursor-pointer lg:w-[400px] lg:h-[540px] shrink-0 cursor-hover"
+                  onClick={() => {
+                    setSelectedProject(project);
+                    setGalleryIndex(0);
+                  }}
+                >
+                  <div className="aspect-[4/5] lg:h-[400px] w-full overflow-hidden mb-4">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    />
+                  </div>
+                  <h3 className="font-serif text-2xl text-[#2C2C2C] mb-1">{project.title}</h3>
+                  <p className="font-sans text-sm text-[#2C2C2C]/60">
+                    {project.style} — {project.location}
+                  </p>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+        
+        {/* Horizontal scroll indicator */}
+        <div className="hidden lg:block fixed bottom-8 right-8 z-30 font-sans text-sm uppercase tracking-widest text-[#2C2C2C]/50 pointer-events-none opacity-0" id="scroll-indicator">
+          Scroll to explore →
+        </div>
+      </section>
 
       {/* Modal */}
       <AnimatePresence>
@@ -213,7 +261,7 @@ export function Portfolio() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-12 bg-[#2C2C2C]/90 backdrop-blur-sm"
+            className="fixed inset-0 z-[110] flex items-center justify-center p-4 md:p-12 bg-[#2C2C2C]/90 backdrop-blur-sm"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
@@ -225,7 +273,7 @@ export function Portfolio() {
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                className="absolute top-4 right-4 z-10 p-2 bg-white/50 backdrop-blur rounded-full text-[#2C2C2C] hover:bg-white transition-colors"
+                className="absolute top-4 right-4 z-10 p-2 bg-white/50 backdrop-blur rounded-full text-[#2C2C2C] hover:bg-white transition-colors cursor-hover"
                 onClick={() => setSelectedProject(null)}
               >
                 <X size={20} />
@@ -241,10 +289,10 @@ export function Portfolio() {
                 
                 {selectedProject.gallery.length > 1 && (
                   <div className="absolute inset-y-0 w-full flex items-center justify-between px-4">
-                    <button onClick={handlePrevImage} className="p-2 bg-white/50 backdrop-blur rounded-full hover:bg-white text-[#2C2C2C]">
+                    <button onClick={handlePrevImage} className="p-2 bg-white/50 backdrop-blur rounded-full hover:bg-white text-[#2C2C2C] cursor-hover">
                       <ChevronLeft size={20} />
                     </button>
-                    <button onClick={handleNextImage} className="p-2 bg-white/50 backdrop-blur rounded-full hover:bg-white text-[#2C2C2C]">
+                    <button onClick={handleNextImage} className="p-2 bg-white/50 backdrop-blur rounded-full hover:bg-white text-[#2C2C2C] cursor-hover">
                       <ChevronRight size={20} />
                     </button>
                   </div>
@@ -297,7 +345,7 @@ export function Portfolio() {
                         }, 300);
                       }
                     }}
-                    className="w-full py-4 bg-[#C4856A] text-white font-sans text-sm uppercase tracking-wider hover:bg-[#b0745b] transition-colors"
+                    className="w-full py-4 bg-[#C4856A] text-white font-sans text-sm uppercase tracking-wider hover:bg-[#b0745b] transition-colors cursor-hover"
                   >
                     Get a Quote
                   </button>
@@ -307,6 +355,6 @@ export function Portfolio() {
           </motion.div>
         )}
       </AnimatePresence>
-    </section>
+    </>
   );
 }

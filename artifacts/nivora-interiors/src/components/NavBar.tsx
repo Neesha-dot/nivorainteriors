@@ -13,6 +13,7 @@ const LINKS = [
 export function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +21,21 @@ export function NavBar() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    document.querySelectorAll("section[id]").forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
 
   const scrollToSection = (href: string) => {
@@ -49,7 +65,7 @@ export function NavBar() {
             e.preventDefault();
             scrollToSection("#home");
           }}
-          className={`font-serif text-2xl tracking-wide ${
+          className={`font-serif text-2xl tracking-wide cursor-hover ${
             isScrolled ? "text-[#2C2C2C]" : "text-white"
           }`}
         >
@@ -58,7 +74,9 @@ export function NavBar() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {LINKS.map((link) => (
+          {LINKS.map((link) => {
+            const isActive = activeSection === link.href.substring(1);
+            return (
             <a
               key={link.name}
               href={link.href}
@@ -66,20 +84,21 @@ export function NavBar() {
                 e.preventDefault();
                 scrollToSection(link.href);
               }}
-              className={`font-sans text-sm uppercase tracking-[0.15em] transition-colors ${
+              className={`font-sans text-sm uppercase tracking-[0.15em] transition-colors relative cursor-hover ${
                 isScrolled
                   ? "text-[#2C2C2C] hover:text-[#C4856A]"
                   : "text-white/80 hover:text-white"
-              }`}
+              } ${isActive ? "after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[1px] after:bg-[#C4856A] after:transition-all" : ""}`}
             >
               {link.name}
             </a>
-          ))}
+            );
+          })}
         </nav>
 
         {/* Mobile Toggle */}
         <button
-          className={`md:hidden p-2 -mr-2 ${
+          className={`md:hidden p-2 -mr-2 cursor-hover ${
             isScrolled ? "text-[#2C2C2C]" : "text-white"
           }`}
           onClick={() => setIsMobileMenuOpen(true)}
@@ -99,7 +118,7 @@ export function NavBar() {
             className="fixed inset-0 bg-[#F9F5F0] z-50 flex flex-col pt-24 px-6 pb-6"
           >
             <button
-              className="absolute top-6 right-6 p-2 text-[#2C2C2C]"
+              className="absolute top-6 right-6 p-2 text-[#2C2C2C] cursor-hover"
               onClick={() => setIsMobileMenuOpen(false)}
               aria-label="Close menu"
             >
@@ -114,7 +133,7 @@ export function NavBar() {
                     e.preventDefault();
                     scrollToSection(link.href);
                   }}
-                  className="font-serif text-3xl text-[#2C2C2C] hover:text-[#C4856A] transition-colors"
+                  className="font-serif text-3xl text-[#2C2C2C] hover:text-[#C4856A] transition-colors cursor-hover"
                 >
                   {link.name}
                 </a>

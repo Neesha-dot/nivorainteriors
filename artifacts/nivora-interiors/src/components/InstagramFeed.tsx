@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Instagram } from "lucide-react";
+import { AnimatedHeading } from "./AnimatedHeading";
 
 const INSTAGRAM_POSTS = [
   "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&q=80",
@@ -18,7 +19,7 @@ export function InstagramFeed() {
   });
 
   return (
-    <section className="py-24 bg-[#F9F5F0]" ref={ref}>
+    <section className="py-24 bg-white" ref={ref}>
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -26,12 +27,12 @@ export function InstagramFeed() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-2">Follow Our Journey</h2>
+          <AnimatedHeading text="Follow Our Journey" className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-2" />
           <a 
             href="https://www.instagram.com/nivorainteriors" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="font-sans text-[#C4856A] uppercase tracking-widest text-sm hover:text-[#2C2C2C] transition-colors"
+            className="font-sans text-[#C4856A] uppercase tracking-widest text-sm hover:text-[#2C2C2C] transition-colors cursor-hover"
           >
             @nivorainteriors
           </a>
@@ -47,7 +48,7 @@ export function InstagramFeed() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative aspect-square overflow-hidden bg-black/5"
+              className="group relative aspect-square overflow-hidden bg-black/5 cursor-hover"
             >
               <img
                 src={post}
@@ -71,7 +72,7 @@ export function InstagramFeed() {
             href="https://www.instagram.com/nivorainteriors"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 text-[#2C2C2C] font-sans font-medium uppercase tracking-wider text-sm hover:text-[#C4856A] transition-colors"
+            className="group flex items-center gap-2 text-[#2C2C2C] font-sans font-medium uppercase tracking-wider text-sm hover:text-[#C4856A] transition-colors cursor-hover"
           >
             <span className="border-b border-transparent group-hover:border-[#C4856A] pb-0.5 transition-colors">See more on Instagram</span>
             <span className="group-hover:translate-x-1 transition-transform">→</span>

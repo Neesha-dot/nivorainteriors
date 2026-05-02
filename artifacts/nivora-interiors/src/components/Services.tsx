@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { AnimatedHeading } from "./AnimatedHeading";
 
 const SERVICES = [
   {
@@ -51,7 +52,7 @@ export function Services() {
           transition={{ duration: 0.8 }}
           className="mb-16"
         >
-          <h2 className="font-serif text-4xl md:text-5xl text-[#2C2C2C]">What We Do</h2>
+          <AnimatedHeading text="What We Do" className="font-serif text-4xl md:text-5xl text-[#2C2C2C]" />
         </motion.div>
 
         <div className="flex flex-col border-t border-[#2C2C2C]/10">
@@ -61,7 +62,7 @@ export function Services() {
               initial={{ opacity: 0, x: -20 }}
               animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-[#2C2C2C]/10 hover:bg-white/50 transition-colors px-4 -mx-4 md:px-6 md:-mx-6 cursor-pointer"
+              className="group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-[#2C2C2C]/10 hover:bg-white/50 transition-colors px-4 -mx-4 md:px-6 md:-mx-6 cursor-pointer cursor-hover"
               onClick={() => {
                 const el = document.querySelector("#contact");
                 if (el) {
