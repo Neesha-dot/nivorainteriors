@@ -1,38 +1,39 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useState } from "react";
+import { Link } from "wouter";
 import { AnimatedHeading } from "./AnimatedHeading";
 
 const PROJECTS = [
   {
     id: 1,
-    title: "The Kapoor Residence",
+    title: "The Mehta Residence",
     location: "Bandra, Mumbai",
-    style: "Modern Minimalist",
+    style: "Modern",
     image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
     isNew: false,
   },
   {
     id: 2,
-    title: "Serenity Suite",
-    location: "Juhu, Mumbai",
+    title: "Kapoor Family Home",
+    location: "Pune",
     style: "Contemporary",
     image: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=80",
     isNew: false,
   },
   {
     id: 3,
-    title: "The Mehta Kitchen",
-    location: "Powai, Mumbai",
-    style: "Modular Modern",
+    title: "The Sharma Suite",
+    location: "Thane",
+    style: "Minimalist",
     image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80",
     isNew: true,
   },
   {
     id: 4,
-    title: "Arora Home Office",
-    location: "Pune",
-    style: "Warm Eclectic",
+    title: "Verma Penthouse",
+    location: "Navi Mumbai",
+    style: "Eclectic",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
     isNew: true,
   },
@@ -64,54 +65,51 @@ function ProjectCard({ project, index, inView }: any) {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-      transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="group relative aspect-[4/3] md:aspect-[3/4] overflow-hidden cursor-pointer cursor-hover transition-transform duration-300"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={tiltStyle}
-      onClick={() => {
-        const el = document.querySelector("#portfolio");
-        if (el) {
-          const offset = el.getBoundingClientRect().top + window.scrollY - 80;
-          window.scrollTo({ top: offset, behavior: "smooth" });
-        }
-      }}
-    >
-      <img
-        src={project.image}
-        alt={project.title}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
-        style={{ transitionTimingFunction: "cubic-bezier(0.25,0.46,0.45,0.94)" }}
-      />
-      <div 
-        className="absolute inset-0 pointer-events-none transition-opacity duration-300" 
-        style={glareStyle}
-      />
-      
-      {project.isNew && (
-        <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-sm text-[#2C2C2C] text-xs uppercase tracking-widest px-3 py-1 font-sans">
-          New
-        </div>
-      )}
+    <Link href="/portfolio" className="block">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+        transition={{ duration: 0.8, delay: index * 0.1 }}
+        className="group relative aspect-[4/3] md:aspect-[3/4] overflow-hidden cursor-pointer cursor-hover transition-transform duration-300"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={tiltStyle}
+      >
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+          style={{ transitionTimingFunction: "cubic-bezier(0.25,0.46,0.45,0.94)" }}
+        />
+        <div 
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300" 
+          style={glareStyle}
+        />
+        
+        {project.isNew && (
+          <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-sm text-[#2C2C2C] text-xs uppercase tracking-widest px-3 py-1 font-sans">
+            New
+          </div>
+        )}
 
-      <div className="absolute inset-0 bg-[#2C2C2C]/85 p-8 flex flex-col justify-end translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10">
-        <p className="text-white/70 font-sans text-xs uppercase tracking-widest mb-2">
-          {project.location} — {project.style}
-        </p>
-        <h3 className="text-white font-serif text-2xl">{project.title}</h3>
-      </div>
-    </motion.div>
+        <div className="absolute inset-0 bg-[#2C2C2C]/85 p-8 flex flex-col justify-end translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10">
+          <p className="text-white/70 font-sans text-xs uppercase tracking-widest mb-2">
+            {project.location} — {project.style}
+          </p>
+          <h3 className="text-white font-serif text-2xl">{project.title}</h3>
+        </div>
+      </motion.div>
+    </Link>
   );
 }
 
-export function FeaturedProjects() {
+export function FeaturedProjects({ limit, showViewAll }: { limit?: number, showViewAll?: boolean }) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+
+  const displayProjects = limit ? PROJECTS.slice(0, limit) : PROJECTS;
 
   return (
     <section className="py-24 md:py-32 bg-white" ref={ref}>
@@ -127,33 +125,27 @@ export function FeaturedProjects() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-16">
-          {PROJECTS.map((project, index) => (
+          {displayProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} inView={inView} />
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex justify-center"
-        >
-          <a
-            href="#portfolio"
-            className="group flex items-center gap-2 text-[#C4856A] font-sans font-medium uppercase tracking-wider text-sm cursor-hover"
-            onClick={(e) => {
-              e.preventDefault();
-              const el = document.querySelector("#portfolio");
-              if (el) {
-                const offset = el.getBoundingClientRect().top + window.scrollY - 80;
-                window.scrollTo({ top: offset, behavior: "smooth" });
-              }
-            }}
+        {showViewAll && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="flex justify-center"
           >
-            <span className="border-b border-[#C4856A] pb-0.5 group-hover:border-transparent transition-colors">View All Projects</span>
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </a>
-        </motion.div>
+            <Link
+              href="/portfolio"
+              className="group flex items-center gap-2 text-[#C4856A] font-sans font-medium uppercase tracking-wider text-sm cursor-hover"
+            >
+              <span className="border-b border-[#C4856A] pb-0.5 group-hover:border-transparent transition-colors">View All Projects</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );

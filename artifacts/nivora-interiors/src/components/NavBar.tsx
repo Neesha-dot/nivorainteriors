@@ -1,54 +1,36 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "wouter";
 
 const LINKS = [
-  { name: "Home", href: "#home" },
-  { name: "Portfolio", href: "#portfolio" },
-  { name: "Services", href: "#services" },
-  { name: "About", href: "#about" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "/" },
+  { name: "Portfolio", href: "/portfolio" },
+  { name: "Services", href: "/services" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export function NavBar() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [location] = useLocation();
+  const isHomePage = location === "/";
+  const [isScrolled, setIsScrolled] = useState(!isHomePage);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
+    if (!isHomePage) {
+      setIsScrolled(true);
+      return;
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+    
+    handleScroll(); // Initial check
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-    document.querySelectorAll("section[id]").forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollToSection = (href: string) => {
-    setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth",
-      });
-    }
-  };
+  }, [isHomePage]);
 
   return (
     <header
@@ -59,31 +41,18 @@ export function NavBar() {
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <a
-          href="#home"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection("#home");
-          }}
-          className={`font-serif text-2xl tracking-wide cursor-hover ${
-            isScrolled ? "text-[#2C2C2C]" : "text-white"
-          }`}
-        >
+        <Link href="/" className={`font-serif text-2xl tracking-wide cursor-hover ${isScrolled ? "text-[#2C2C2C]" : "text-white"}`}>
           Nivora Interiors
-        </a>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
           {LINKS.map((link) => {
-            const isActive = activeSection === link.href.substring(1);
+            const isActive = location === link.href;
             return (
-            <a
+            <Link
               key={link.name}
               href={link.href}
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection(link.href);
-              }}
               className={`font-sans text-sm uppercase tracking-[0.15em] transition-colors relative cursor-hover ${
                 isScrolled
                   ? "text-[#2C2C2C] hover:text-[#C4856A]"
@@ -91,7 +60,7 @@ export function NavBar() {
               } ${isActive ? "after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[1px] after:bg-[#C4856A] after:transition-all" : ""}`}
             >
               {link.name}
-            </a>
+            </Link>
             );
           })}
         </nav>
@@ -126,17 +95,14 @@ export function NavBar() {
             </button>
             <nav className="flex flex-col gap-8 mt-12 items-center">
               {LINKS.map((link) => (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(link.href);
-                  }}
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="font-serif text-3xl text-[#2C2C2C] hover:text-[#C4856A] transition-colors cursor-hover"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </nav>
           </motion.div>

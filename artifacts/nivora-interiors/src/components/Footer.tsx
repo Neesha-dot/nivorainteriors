@@ -1,18 +1,9 @@
 import { SiInstagram, SiWhatsapp } from "react-icons/si";
+import { Link } from "wouter";
 
 export function Footer() {
-  const scrollToTop = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const scrollToSection = (e: React.MouseEvent, href: string) => {
-    e.preventDefault();
-    const el = document.querySelector(href);
-    if (el) {
-      const offset = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: offset, behavior: "smooth" });
-    }
   };
 
   return (
@@ -22,9 +13,9 @@ export function Footer() {
           
           {/* Brand */}
           <div className="flex flex-col items-start md:items-start">
-            <a href="#home" onClick={scrollToTop} className="font-serif text-3xl mb-4 text-white cursor-hover">
+            <Link href="/" onClick={scrollToTop} className="font-serif text-3xl mb-4 text-white cursor-hover">
               Nivora Interiors
-            </a>
+            </Link>
             <p className="font-sans text-white/60 text-sm italic">
               From Vision to Execution
             </p>
@@ -33,15 +24,21 @@ export function Footer() {
           {/* Links */}
           <div className="flex flex-col items-start md:items-center">
             <nav className="flex flex-col gap-4 text-center md:text-left">
-              {['Home', 'Portfolio', 'Services', 'About', 'Contact'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  onClick={(e) => scrollToSection(e, `#${item.toLowerCase()}`)}
+              {[
+                { name: 'Home', href: '/' },
+                { name: 'Portfolio', href: '/portfolio' },
+                { name: 'Services', href: '/services' },
+                { name: 'About', href: '/about' },
+                { name: 'Contact', href: '/contact' }
+              ].map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={scrollToTop}
                   className="font-sans text-sm uppercase tracking-widest text-white/70 hover:text-[#C4856A] transition-colors cursor-hover"
                 >
-                  {item}
-                </a>
+                  {item.name}
+                </Link>
               ))}
             </nav>
           </div>

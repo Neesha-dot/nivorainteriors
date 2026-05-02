@@ -1,120 +1,119 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { AnimatedHeading } from "./AnimatedHeading";
+import { useLocation } from "wouter";
 
-const CATEGORIES = ["All", "Living Room", "Bedroom", "Kitchen", "Office", "Full Home", "Commercial"];
+const STYLE_FILTERS = ["All", "Modern", "Minimalist", "Traditional", "Contemporary", "Eclectic", "Vastu-Inspired"];
 
 const ALL_PROJECTS = [
   {
     id: 1,
-    title: "The Kapoor Residence",
-    category: "Living Room",
-    style: "Modern Minimalist",
+    title: "The Mehta Residence",
+    style: "Modern",
     location: "Bandra, Mumbai",
+    year: "2024",
     image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
     gallery: [
       "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1200&q=80",
-      "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?w=1200&q=80"
+      "https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?w=1200&q=80",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80"
     ],
     description: "A serene, uncluttered living space focusing on natural light and tactile materials. We stripped back unnecessary ornamentation to create a calm sanctuary in the heart of bustling Bandra.",
+    concept: "Warm Minimalism — natural textures layered with restraint.",
     materials: "Travertine, Oak Wood, Linen, Brushed Brass",
-    concept: "Warm Minimalism",
     colors: ["#E8E3DF", "#C4856A", "#8C837C", "#2C2C2C"]
   },
   {
     id: 2,
-    title: "Serenity Suite",
-    category: "Bedroom",
+    title: "Kapoor Family Home",
     style: "Contemporary",
-    location: "Juhu, Mumbai",
+    location: "Pune",
+    year: "2024",
     image: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=80",
-    gallery: ["https://images.unsplash.com/photo-1540518614846-7eded433c457?w=1200&q=80"],
-    description: "Designed for deep rest, this master suite employs a soft, layered palette. Custom joinery ensures everything has its place, leaving the mind free to unwind.",
+    gallery: ["https://images.unsplash.com/photo-1540518614846-7eded433c457?w=1200&q=80", "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80"],
+    description: "Designed for a family of five, this full-home project balances elegance with everyday practicality. Custom joinery throughout ensures everything has its place.",
+    concept: "Relaxed Luxury — comfortable sophistication for family living.",
     materials: "Bouclé, Walnut, Rattan, Limewash",
-    concept: "Tactile Sanctuary",
     colors: ["#DCD8D3", "#B5A89E", "#5A514B", "#252322"]
   },
   {
     id: 3,
-    title: "The Mehta Kitchen",
-    category: "Kitchen",
-    style: "Modular Modern",
-    location: "Powai, Mumbai",
+    title: "The Sharma Suite",
+    style: "Minimalist",
+    location: "Thane",
+    year: "2023",
     image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80",
     gallery: ["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80"],
-    description: "A highly functional yet beautiful kitchen tailored to Indian cooking habits. Features include a heavy-duty concealed extraction system and seamless fluted glass cabinetry.",
+    description: "A masterclass in restraint. Every element of this suite was chosen for its tactile quality and visual calm. Nothing shouts; everything whispers.",
+    concept: "Refined Silence — where less becomes immeasurably more.",
     materials: "Quartzite, Fluted Glass, Matte Lacquer, Bronze",
-    concept: "Hidden Functionality",
     colors: ["#F2EFEA", "#4A5D54", "#D4AC82", "#1E1E1E"]
   },
   {
     id: 4,
-    title: "Arora Home Office",
-    category: "Office",
-    style: "Warm Eclectic",
-    location: "Pune",
+    title: "Verma Penthouse",
+    style: "Eclectic",
+    location: "Navi Mumbai",
+    year: "2023",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
-    gallery: ["https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80"],
-    description: "A space that inspires productivity without feeling corporate. Rich tones, a custom reading nook, and curated artwork make this office a joy to work from.",
-    materials: "Teak, Leather, Wool, Antique Brass",
-    concept: "Collected Professionalism",
-    colors: ["#3D2B23", "#A67B5B", "#E3D7C8", "#111111"]
+    gallery: ["https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80", "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?w=1200&q=80"],
+    description: "A bold, collected interior for a client with a love of art and travel. Each room tells a different story; the home as a whole tells theirs.",
+    concept: "Curated Eclecticism — global influences rooted in Indian warmth.",
+    materials: "Velvet, Aged Brass, Terracotta Tile, Dark Teak",
+    colors: ["#8B4513", "#F5DEB3", "#2F4F4F", "#D2691E"]
   },
   {
     id: 5,
-    title: "Sharma Full Home",
-    category: "Full Home",
-    style: "Traditional Contemporary",
-    location: "Thane",
+    title: "The Joshi Villa",
+    style: "Traditional",
+    location: "Ambernath",
+    year: "2023",
     image: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=800&q=80",
     gallery: ["https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=1200&q=80"],
-    description: "Blending heirloom Indian furniture with clean, modern lines. The entire home flows seamlessly, rooted in Vastu principles while maintaining a fresh, airy feel.",
-    materials: "Rosewood, Cane, Block-printed Cotton, Terrazzo",
-    concept: "Modern Heritage",
-    colors: ["#EFECE6", "#8F3B26", "#BFA78A", "#2C342C"]
+    description: "Rooted in Indian design tradition, this villa celebrates craftsmanship — carved wooden accents, hand-blocked textiles, and a Vastu-aligned floor plan.",
+    concept: "Heritage Reimagined — traditional forms with modern comfort.",
+    materials: "Teak, Marble, Hand-block Cotton, Brass Inlay",
+    colors: ["#F5E6C8", "#8B2500", "#4A3728", "#D4A853"]
   },
   {
     id: 6,
-    title: "CaféLattice",
-    category: "Commercial",
-    style: "Industrial Chic",
-    location: "Navi Mumbai",
+    title: "Arora Office Interiors",
+    style: "Modern",
+    location: "Mumbai CBD",
+    year: "2022",
     image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&q=80",
-    gallery: ["https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80"],
-    description: "A vibrant neighborhood café designed to transition from morning coffee runs to evening gatherings. Exposed ceilings paired with warm terracotta plaster.",
-    materials: "Exposed Brick, Micro-cement, Steel, Ash Wood",
-    concept: "Earthy Industrial",
-    colors: ["#CC7D63", "#D1C9C1", "#686A65", "#181818"]
+    gallery: ["https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80", "https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=1200&q=80"],
+    description: "A 4,500 sqft commercial office designed to inspire productivity and reflect the brand's forward-thinking culture. Open plan, acoustic pods, and a statement reception.",
+    concept: "Purposeful Energy — spaces that work as hard as the people in them.",
+    materials: "Polished Concrete, Glass, Perforated Steel, Engineered Timber",
+    colors: ["#F0EEE9", "#3D3D3D", "#C4856A", "#A8B5A8"]
   },
   {
     id: 7,
-    title: "The Joshi Bedroom",
-    category: "Bedroom",
-    style: "Serene Minimal",
-    location: "Ambernath",
-    image: "https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=800&q=80",
-    gallery: ["https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=1200&q=80"],
-    description: "A guest bedroom that feels like a boutique hotel stay. Soft lighting and bespoke textured wall finishes create an inviting atmosphere.",
-    materials: "Tadelakt, Jute, Linen, Pale Oak",
-    concept: "Soft Geometry",
-    colors: ["#E6DED3", "#B6AD9F", "#D9A087", "#2D2A28"]
+    title: "The Iyer Sanctuary",
+    style: "Vastu-Inspired",
+    location: "Thane",
+    year: "2024",
+    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&q=80",
+    gallery: ["https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1200&q=80"],
+    description: "Every element of this home was designed in harmony with Vastu Shastra — from the entry orientation to the placement of the Pooja room and master bedroom.",
+    concept: "Sacred Harmony — ancient principles guiding modern living.",
+    materials: "Kota Stone, Copper Accents, Natural Linen, Sandalwood Teak",
+    colors: ["#FFF8E7", "#C4956A", "#6B5344", "#2C2C2C"]
   },
   {
     id: 8,
-    title: "Patel Living Room",
-    category: "Living Room",
-    style: "Eclectic Warm",
+    title: "Patel Family Nest",
+    style: "Contemporary",
     location: "Nashik",
+    year: "2022",
     image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80",
     gallery: ["https://images.unsplash.com/photo-1600210492493-0946911123ea?w=1200&q=80"],
-    description: "Designed for a family that loves to entertain. Features a dramatic central rug, ample seating, and a custom bar unit that blends seamlessly into the panelling.",
-    materials: "Velvet, Dark Walnut, Antiqued Mirror, Brass",
-    concept: "Elevated Entertaining",
-    colors: ["#F5F2EB", "#C28C72", "#485E69", "#24201E"]
+    description: "A warm, layered interior for a multi-generational family. The challenge was balancing the tastes of three generations — the result is timeless and deeply personal.",
+    concept: "Multigenerational Warmth — one home, many stories.",
+    materials: "Ceramic, Jute, Linen Weave, Antique Brass",
+    colors: ["#E8DDD0", "#C4856A", "#7A6A5A", "#3A2E24"]
   }
 ];
 
@@ -122,47 +121,16 @@ export function Portfolio() {
   const [filter, setFilter] = useState("All");
   const [selectedProject, setSelectedProject] = useState<typeof ALL_PROJECTS[0] | null>(null);
   const [galleryIndex, setGalleryIndex] = useState(0);
+  const [, navigate] = useLocation();
 
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    
-    let ctx: gsap.Context;
-
-    if (window.innerWidth >= 1024 && scrollContainerRef.current && trackRef.current) {
-      ctx = gsap.context(() => {
-        const track = trackRef.current!;
-        const scrollWidth = track.scrollWidth - window.innerWidth;
-        
-        gsap.to(track, {
-          x: -scrollWidth,
-          ease: "none",
-          scrollTrigger: {
-            trigger: scrollContainerRef.current,
-            pin: true,
-            scrub: 1,
-            end: () => `+=${scrollWidth}`,
-            invalidateOnRefresh: true,
-          }
-        });
-      }, scrollContainerRef);
-    }
-    
-    return () => {
-      if (ctx) ctx.revert();
-    };
-  }, [filter]); // Re-run if filter changes
-
   const filteredProjects = filter === "All" 
     ? ALL_PROJECTS 
-    : ALL_PROJECTS.filter(p => p.category === filter);
+    : ALL_PROJECTS.filter(p => p.style === filter);
 
   const handleNextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -180,19 +148,17 @@ export function Portfolio() {
 
   return (
     <>
-      <section id="portfolio" className="py-24 md:py-32 bg-white" ref={ref}>
-        <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+      <section id="portfolio" className="pb-24 md:pb-32 bg-white" ref={ref}>
+        <div className="container mx-auto px-6 md:px-12 max-w-7xl pt-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center mb-12"
+            className="flex flex-col items-center mb-16"
           >
-            <AnimatedHeading text="Our Work" className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-8" />
-            
             {/* Filters */}
-            <div className="flex flex-wrap justify-center gap-4 md:gap-8 max-w-3xl">
-              {CATEGORIES.map((cat) => (
+            <div className="flex flex-wrap justify-center gap-4 md:gap-8 max-w-4xl">
+              {STYLE_FILTERS.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setFilter(cat)}
@@ -207,16 +173,12 @@ export function Portfolio() {
               ))}
             </div>
           </motion.div>
-        </div>
 
-        {/* Desktop Horizontal Scroll Container / Mobile Vertical Grid */}
-        <div ref={scrollContainerRef} className="overflow-hidden lg:pl-[calc((100vw-1280px)/2+48px)] pl-6 pr-6 w-full">
           <motion.div 
-            ref={trackRef}
             layout 
-            className="flex flex-col lg:flex-row gap-8 w-full lg:w-max"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 w-full"
           >
-            <AnimatePresence>
+            <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => (
                 <motion.div
                   key={project.id}
@@ -225,32 +187,27 @@ export function Portfolio() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.5 }}
-                  className="group cursor-pointer lg:w-[400px] lg:h-[540px] shrink-0 cursor-hover"
+                  className="group cursor-pointer w-full shrink-0 cursor-hover"
                   onClick={() => {
                     setSelectedProject(project);
                     setGalleryIndex(0);
                   }}
                 >
-                  <div className="aspect-[4/5] lg:h-[400px] w-full overflow-hidden mb-4">
+                  <div className="aspect-[4/5] w-full overflow-hidden mb-6">
                     <img
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     />
                   </div>
-                  <h3 className="font-serif text-2xl text-[#2C2C2C] mb-1">{project.title}</h3>
-                  <p className="font-sans text-sm text-[#2C2C2C]/60">
+                  <h3 className="font-serif text-3xl text-[#2C2C2C] mb-2">{project.title}</h3>
+                  <p className="font-sans text-sm uppercase tracking-widest text-[#2C2C2C]/60">
                     {project.style} — {project.location}
                   </p>
                 </motion.div>
               ))}
             </AnimatePresence>
           </motion.div>
-        </div>
-        
-        {/* Horizontal scroll indicator */}
-        <div className="hidden lg:block fixed bottom-8 right-8 z-30 font-sans text-sm uppercase tracking-widest text-[#2C2C2C]/50 pointer-events-none opacity-0" id="scroll-indicator">
-          Scroll to explore →
         </div>
       </section>
 
@@ -280,7 +237,7 @@ export function Portfolio() {
               </button>
 
               {/* Gallery Side */}
-              <div className="w-full md:w-3/5 relative aspect-square md:aspect-auto md:min-h-full">
+              <div className="w-full md:w-3/5 relative aspect-square md:aspect-auto md:min-h-[60vh]">
                 <img
                   src={selectedProject.gallery[galleryIndex]}
                   alt={selectedProject.title}
@@ -288,11 +245,11 @@ export function Portfolio() {
                 />
                 
                 {selectedProject.gallery.length > 1 && (
-                  <div className="absolute inset-y-0 w-full flex items-center justify-between px-4">
-                    <button onClick={handlePrevImage} className="p-2 bg-white/50 backdrop-blur rounded-full hover:bg-white text-[#2C2C2C] cursor-hover">
+                  <div className="absolute inset-y-0 w-full flex items-center justify-between px-4 pointer-events-none">
+                    <button onClick={handlePrevImage} className="pointer-events-auto p-2 bg-white/50 backdrop-blur rounded-full hover:bg-white text-[#2C2C2C] cursor-hover">
                       <ChevronLeft size={20} />
                     </button>
-                    <button onClick={handleNextImage} className="p-2 bg-white/50 backdrop-blur rounded-full hover:bg-white text-[#2C2C2C] cursor-hover">
+                    <button onClick={handleNextImage} className="pointer-events-auto p-2 bg-white/50 backdrop-blur rounded-full hover:bg-white text-[#2C2C2C] cursor-hover">
                       <ChevronRight size={20} />
                     </button>
                   </div>
@@ -301,25 +258,32 @@ export function Portfolio() {
 
               {/* Info Side */}
               <div className="w-full md:w-2/5 p-8 md:p-12 flex flex-col">
-                <p className="font-sans text-xs uppercase tracking-widest text-[#C4856A] mb-2">{selectedProject.category}</p>
-                <h2 className="font-serif text-4xl text-[#2C2C2C] mb-2">{selectedProject.title}</h2>
-                <p className="font-sans text-sm text-[#2C2C2C]/60 mb-8">{selectedProject.location}</p>
+                <h2 className="font-serif text-4xl text-[#2C2C2C] mb-3">{selectedProject.title}</h2>
+                <div className="flex gap-2 items-center font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/60 mb-8">
+                  <span>{selectedProject.location}</span>
+                  <span>•</span>
+                  <span>{selectedProject.year}</span>
+                  <span>•</span>
+                  <span className="text-[#C4856A]">{selectedProject.style}</span>
+                </div>
                 
-                <p className="font-sans text-[#2C2C2C]/80 leading-relaxed mb-8">
-                  {selectedProject.description}
-                </p>
-
-                <div className="space-y-4 mb-8 flex-1">
+                <div className="space-y-6 mb-8 flex-1">
                   <div>
-                    <h4 className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/50 mb-1">Concept</h4>
+                    <h4 className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/50 mb-2">Concept</h4>
                     <p className="font-serif text-lg text-[#2C2C2C]">{selectedProject.concept}</p>
                   </div>
                   <div>
-                    <h4 className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/50 mb-1">Materials</h4>
+                    <h4 className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/50 mb-2">Description</h4>
+                    <p className="font-sans text-[#2C2C2C]/80 leading-relaxed text-sm">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/50 mb-2">Materials</h4>
                     <p className="font-sans text-sm text-[#2C2C2C]">{selectedProject.materials}</p>
                   </div>
                   <div>
-                    <h4 className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/50 mb-2">Palette</h4>
+                    <h4 className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/50 mb-3">Palette</h4>
                     <div className="flex gap-3">
                       {selectedProject.colors.map((color, i) => (
                         <div 
@@ -337,13 +301,7 @@ export function Portfolio() {
                   <button 
                     onClick={() => {
                       setSelectedProject(null);
-                      const el = document.querySelector("#contact");
-                      if (el) {
-                        setTimeout(() => {
-                          const offset = el.getBoundingClientRect().top + window.scrollY - 80;
-                          window.scrollTo({ top: offset, behavior: "smooth" });
-                        }, 300);
-                      }
+                      navigate("/contact");
                     }}
                     className="w-full py-4 bg-[#C4856A] text-white font-sans text-sm uppercase tracking-wider hover:bg-[#b0745b] transition-colors cursor-hover"
                   >

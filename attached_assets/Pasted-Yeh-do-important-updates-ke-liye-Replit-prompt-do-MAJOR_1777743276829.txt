@@ -1,0 +1,114 @@
+Yeh do important updates ke liye Replit prompt do:
+
+MAJOR UPDATES — PLEASE IMPLEMENT ALL OF THESE:
+
+UPDATE 1 — CONVERT FROM SINGLE PAGE TO MULTI-PAGE WEBSITE
+Create separate HTML files for each page:
+index.html         → Homepage only
+portfolio.html     → Full portfolio page
+services.html      → Full services page
+about.html         → Full about page
+contact.html       → Full contact page
+Homepage (index.html) should have:
+
+Full hero section
+Short intro snippet (2-3 lines only) with "Read Our Story →" linking to about.html
+Featured Projects preview — show only 3-4 project cards with "View All Projects →" linking to portfolio.html
+Services overview — just list service names with "See All Services →" linking to services.html
+Testimonials snippet (2-3 reviews)
+Instagram feed section
+Enquiry form
+Footer
+
+Every other page should have the full detailed content of that section.
+All nav links should point to their respective .html files, not anchor links.
+
+UPDATE 2 — PROJECTS ARE NAMED BY PROJECT NAME, NOT ROOM TYPE
+In portfolio.html, projects are NOT categorized by room type (Bedroom / Living Room / Kitchen). Instead each project has its own unique name like a real design studio:
+Example project names:
+- "The Mehta Residence" — Bandra, Mumbai
+- "Kapoor Family Home" — Pune
+- "The Sharma Suite" — Thane
+- "Verma Penthouse" — Navi Mumbai
+- "The Joshi Villa" — Ambernath
+- "Arora Office Interiors" — Mumbai CBD
+
+Each project card shows:
+- Project name (e.g., "The Mehta Residence")
+- Location (e.g., Bandra, Mumbai)
+- Style tag (e.g., Modern Minimalist)
+- One hero image
+- On click → opens individual project detail page (mehta-residence.html or a modal)
+
+Inside each project detail:
+- Project name as heading
+- Location, Year, Style
+- Full photo gallery (multiple images)
+- Short description of the project
+- Design concept and theme
+- Materials used
+- Colour palette swatches
+- "Love this style? Let's create something similar → Get a Quote" button
+Filter tabs on portfolio page should be by STYLE, not room type:
+All | Modern | Minimalist | Traditional | Contemporary | Eclectic | Vastu-Inspired
+
+UPDATE 3 — ADD "HOW WE WORK" SECTION
+Add this section on the About page (about.html) AND a short version on the homepage:
+Section heading: "How We Work"
+
+Step 01 — Understanding Your Vision
+Every project begins with listening. We take time to understand your lifestyle, preferences, and the way you use your space. This ensures the design direction feels truly yours.
+[Image grid on the right: 2x2 collage of interior photos]
+
+Step 02 — Design & Planning
+We translate your vision into detailed design concepts — mood boards, 3D visualisations, material selections, and floor plans — so you can see your space before a single nail is hammered.
+[Image on right]
+
+Step 03 — Execution & Supervision
+Our team supervises every stage of implementation — from civil work to final styling — ensuring the finished space matches the design exactly.
+[Image on right]
+
+Step 04 — Handover & Styling
+We do a final walkthrough with you, style the space with decor, and hand over a home that is move-in ready and exactly as you imagined.
+[Image on right]
+
+Layout: Alternating left-right layout (text left image right, then image left text right) — like the reference screenshot
+Large step number (01, 02, 03, 04) shown in very light muted colour in the background as a decorative element
+
+UPDATE 4 — ADD "WHAT IT MEANS TO BE A DESIGNER" ACCORDION SECTION
+Add this section on the About page after the How We Work section:
+Section heading: "What It Means To Be A Designer."
+Subheading: "These Are The Values We Stand For:"
+
+Accordion layout — 2 column grid, each item expands on click:
+
+Left column:
+- INTEGRITY IS EVERYTHING
+  "We conduct our work with the highest level of honesty and transparency. Every decision we make is guided by what is truly best for you and your space."
+
+- WE ARE TRUSTWORTHY
+  "Your home is your most personal space. We treat every project with complete confidentiality, care, and commitment — as if it were our own."
+
+Right column:
+- WE PROVIDE VALUE AND QUALITY
+  "We believe great design should be accessible. We source the best materials within your budget and never compromise on quality or finish."
+
+- WE ARE LIFELONG LEARNERS
+  "Design is always evolving. We constantly update our knowledge of trends, materials, and techniques to bring you the freshest and most relevant design solutions."
+
+- THERE IS NO I IN TEAM
+  "Every project is a collaboration — between us, our vendors, contractors, and most importantly, you. Great spaces are built together."
+
+Accordion behaviour:
+- Click + to open an item, it expands showing the text, + changes to —
+- Only one item open at a time
+- Smooth expand/collapse animation
+- Open item has a warm cream/beige background (like screenshot)
+- Closed items have light grey background
+
+UPDATE 5 — HOMEPAGE SHOWS OVERVIEW ONLY, DETAILS ON INNER PAGES
+On index.html keep these sections SHORT with a clear CTA link to the full page:
+Featured Projects → show 3 cards only → "View All Projects →" (links to portfolio.html)
+Services → show 4 services only as a simple list → "See All Services →" (links to services.html)  
+About snippet → 3 lines of intro text + designer photo → "Read Our Story →" (links to about.html)
+How We Work → show Step 01 only as a teaser → "See Our Full Process →" (links to about.html)

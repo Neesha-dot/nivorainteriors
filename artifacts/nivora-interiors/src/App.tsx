@@ -5,28 +5,30 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Router, Route, Switch, useLocation } from "wouter";
 
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 import { NavBar } from "@/components/NavBar";
-import { Hero } from "@/components/Hero";
-import { AboutSnippet } from "@/components/AboutSnippet";
-import { FeaturedProjects } from "@/components/FeaturedProjects";
-import { Services } from "@/components/Services";
-import { Portfolio } from "@/components/Portfolio";
-import { Testimonials } from "@/components/Testimonials";
-import { InstagramFeed } from "@/components/InstagramFeed";
-import { AboutSection } from "@/components/AboutSection";
-import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { PopupLeadForm } from "@/components/PopupLeadForm";
 import { StickyCTA } from "@/components/StickyCTA";
 import { IntroOverlay } from "@/components/IntroOverlay";
 import { CustomCursor } from "@/components/CustomCursor";
-import { MarqueeStrip } from "@/components/MarqueeStrip";
-import { StatsSection } from "@/components/StatsSection";
+
+import { HomePage } from "./pages/HomePage";
+import { PortfolioPage } from "./pages/PortfolioPage";
+import { ServicesPage } from "./pages/ServicesPage";
+import { AboutPage } from "./pages/AboutPage";
+import { ContactPage } from "./pages/ContactPage";
 
 const queryClient = new QueryClient();
+
+function ScrollToTop() {
+  const [location] = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [location]);
+  return null;
+}
 
 function App() {
   const [introComplete, setIntroComplete] = useState(false);
@@ -46,34 +48,30 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="min-h-screen bg-[#F9F5F0] text-[#2C2C2C] selection:bg-[#C4856A] selection:text-white font-sans relative">
-          <IntroOverlay onComplete={() => setIntroComplete(true)} />
-          <CustomCursor />
-          
-          <AnnouncementBanner />
-          <NavBar />
-          
-          <main>
-            <Hero introComplete={introComplete} />
-            <MarqueeStrip />
-            <AboutSnippet />
-            <StatsSection />
-            <FeaturedProjects />
-            <Services />
-            <MarqueeStrip />
-            <Portfolio />
-            <Testimonials />
-            <InstagramFeed />
-            <AboutSection />
-            <ContactForm />
-          </main>
+        <Router>
+          <div className="min-h-screen bg-[#F9F5F0] text-[#2C2C2C] selection:bg-[#C4856A] selection:text-white font-sans relative">
+            <ScrollToTop />
+            <IntroOverlay onComplete={() => setIntroComplete(true)} />
+            <CustomCursor />
 
-          <Footer />
+            <AnnouncementBanner />
+            <NavBar />
 
-          <FloatingWhatsApp />
-          <PopupLeadForm />
-          <StickyCTA />
-        </div>
+            <Switch>
+              <Route path="/" component={() => <HomePage introComplete={introComplete} />} />
+              <Route path="/portfolio" component={PortfolioPage} />
+              <Route path="/services" component={ServicesPage} />
+              <Route path="/about" component={AboutPage} />
+              <Route path="/contact" component={ContactPage} />
+            </Switch>
+
+            <Footer />
+
+            <FloatingWhatsApp />
+            <PopupLeadForm />
+            <StickyCTA />
+          </div>
+        </Router>
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>
@@ -81,3 +79,4 @@ function App() {
 }
 
 export default App;
+

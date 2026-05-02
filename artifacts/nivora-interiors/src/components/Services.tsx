@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { AnimatedHeading } from "./AnimatedHeading";
+import { Link, useLocation } from "wouter";
 
 const SERVICES = [
   {
@@ -37,11 +38,14 @@ const SERVICES = [
   },
 ];
 
-export function Services() {
+export function Services({ homePreview = false }: { homePreview?: boolean }) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
+  const [, navigate] = useLocation();
+
+  const displayServices = homePreview ? SERVICES.slice(0, 4) : SERVICES;
 
   return (
     <section id="services" className="py-24 md:py-32 bg-[#F9F5F0]" ref={ref}>
@@ -50,48 +54,67 @@ export function Services() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8 }}
-          className="mb-16"
+          className="mb-16 text-center md:text-left"
         >
           <AnimatedHeading text="What We Do" className="font-serif text-4xl md:text-5xl text-[#2C2C2C]" />
         </motion.div>
 
         <div className="flex flex-col border-t border-[#2C2C2C]/10">
-          {SERVICES.map((service, index) => (
+          {displayServices.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -20 }}
               animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-[#2C2C2C]/10 hover:bg-white/50 transition-colors px-4 -mx-4 md:px-6 md:-mx-6 cursor-pointer cursor-hover"
+              className={`group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-[#2C2C2C]/10 hover:bg-white/50 transition-colors px-4 -mx-4 md:px-6 md:-mx-6 ${!homePreview ? "cursor-pointer cursor-hover" : ""}`}
               onClick={() => {
-                const el = document.querySelector("#contact");
-                if (el) {
-                  const offset = el.getBoundingClientRect().top + window.scrollY - 80;
-                  window.scrollTo({ top: offset, behavior: "smooth" });
+                if (!homePreview) {
+                  navigate("/contact");
                 }
               }}
             >
               <div className="flex-1 mb-2 md:mb-0">
                 <h3 className="font-serif text-2xl text-[#2C2C2C] group-hover:text-[#C4856A] transition-colors">{service.title}</h3>
               </div>
-              <div className="flex-1 md:text-right pr-4 md:pr-12">
-                <p className="font-sans text-[#2C2C2C]/60 text-sm md:text-base">{service.description}</p>
-              </div>
-              <div className="hidden md:block opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all text-[#C4856A] font-sans text-sm uppercase tracking-wider">
-                Enquire →
-              </div>
+              {!homePreview && (
+                <>
+                  <div className="flex-1 md:text-right pr-4 md:pr-12">
+                    <p className="font-sans text-[#2C2C2C]/60 text-sm md:text-base">{service.description}</p>
+                  </div>
+                  <div className="hidden md:block opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all text-[#C4856A] font-sans text-sm uppercase tracking-wider">
+                    Enquire →
+                  </div>
+                </>
+              )}
             </motion.div>
           ))}
         </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center text-[#2C2C2C]/50 italic font-serif mt-12"
-        >
-          Pricing starting from ₹2,50,000 or custom quote on request
-        </motion.p>
+        {homePreview ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex justify-center md:justify-start mt-12"
+          >
+            <Link
+              href="/services"
+              className="group flex items-center gap-2 text-[#C4856A] font-sans font-medium uppercase tracking-wider text-sm cursor-hover"
+            >
+              <span className="border-b border-[#C4856A] pb-0.5 group-hover:border-transparent transition-colors">See All Services</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
+          </motion.div>
+        ) : (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="text-center text-[#2C2C2C]/50 italic font-serif mt-12"
+          >
+            Pricing starting from ₹2,50,000 or custom quote on request
+          </motion.p>
+        )}
       </div>
     </section>
   );

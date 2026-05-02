@@ -1,16 +1,12 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { useLocation } from "wouter";
 
 export function Hero({ introComplete = true }: { introComplete?: boolean }) {
+  const [, navigate] = useLocation();
+
   const scrollToPortfolio = () => {
-    const element = document.querySelector("#portfolio");
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: "smooth",
-      });
-    }
+    navigate("/portfolio");
   };
 
   return (
