@@ -5,8 +5,8 @@ import { useLocation } from "wouter";
 export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const [, navigate] = useLocation();
 
-  const scrollToPortfolio = () => {
-    navigate("/portfolio");
+  const handleCTA = () => {
+    window.open("https://wa.me/919999999999?text=Hi!%20I%20am%20interested%20in%20interior%20design%20services.%20Can%20we%20discuss%20my%20project%3F", "_blank");
   };
 
   return (
@@ -41,15 +41,25 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
           Spaces That Speak<br />Your Story
         </motion.h1>
 
-        <motion.button
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          onClick={scrollToPortfolio}
-          className="border border-white text-white px-8 py-4 uppercase tracking-wider text-sm font-sans hover:bg-white hover:text-[#2C2C2C] transition-all duration-500 cursor-hover"
+          className="flex flex-col items-center gap-4"
         >
-          Explore Our Work
-        </motion.button>
+          <button
+            onClick={handleCTA}
+            className="border border-white text-white px-8 py-4 uppercase tracking-wider text-sm font-sans hover:bg-white hover:text-[#2C2C2C] transition-all duration-500 cursor-hover"
+          >
+            Book Free Consultation
+          </button>
+          <button 
+            onClick={() => navigate("/portfolio")}
+            className="text-white/70 text-sm font-sans hover:underline hover:text-white transition-colors cursor-pointer"
+          >
+            or Explore Our Work →
+          </button>
+        </motion.div>
       </div>
 
       {/* Scroll Indicator */}

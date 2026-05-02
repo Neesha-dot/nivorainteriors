@@ -13,6 +13,8 @@ const formSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   city: z.string().min(2, "City is required"),
   spaceType: z.string().min(1, "Please select a space type"),
+  budget: z.string().min(1, "Please select a budget range"),
+  source: z.string().min(1, "Please tell us how you heard about us"),
   description: z.string().optional(),
   callbackTime: z.string().min(1, "Please select a preferred callback time"),
 });
@@ -68,9 +70,17 @@ export function ContactForm() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           {isSuccess ? (
-            <div className="bg-white p-12 text-center border border-[#C4856A]/20">
-              <h3 className="font-serif text-3xl text-[#2C2C2C] mb-4">Thank you for reaching out</h3>
-              <p className="font-sans text-[#2C2C2C]/70">We have received your enquiry and will be in touch shortly.</p>
+            <div className="bg-white p-12 text-center border border-[#C4856A]/20 flex flex-col items-center">
+              <h3 className="font-serif text-3xl text-[#2C2C2C] mb-4">Thank you!</h3>
+              <p className="font-sans text-[#2C2C2C]/70 mb-8">We've received your enquiry and will call you back within 24 hours.</p>
+              <a 
+                href="https://wa.me/919999999999?text=Hi!%20I%20just%20submitted%20an%20enquiry%20on%20your%20website."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-[#C4856A] text-[#C4856A] px-8 py-3 uppercase tracking-wider text-sm font-sans hover:bg-[#C4856A] hover:text-white transition-colors"
+              >
+                Or Chat on WhatsApp <SiWhatsapp size={16} />
+              </a>
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 bg-white p-8 md:p-12 shadow-sm border border-[#2C2C2C]/5">
@@ -134,6 +144,38 @@ export function ContactForm() {
                     <option value="Other">Other</option>
                   </select>
                   {errors.spaceType && <p className="text-red-500 text-xs mt-1">{errors.spaceType.message}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/70">Budget Range *</label>
+                  <select 
+                    {...register("budget")}
+                    className="w-full border-b border-[#2C2C2C]/20 py-2 bg-transparent focus:outline-none focus:border-[#C4856A] transition-colors rounded-none appearance-none"
+                  >
+                    <option value="">Select your budget</option>
+                    <option value="Under ₹5 Lakh">Under ₹5 Lakh</option>
+                    <option value="₹5–10 Lakh">₹5–10 Lakh</option>
+                    <option value="₹10–20 Lakh">₹10–20 Lakh</option>
+                    <option value="₹20 Lakh+">₹20 Lakh+</option>
+                    <option value="Not Decided Yet">Not Decided Yet</option>
+                  </select>
+                  {errors.budget && <p className="text-red-500 text-xs mt-1">{errors.budget.message}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/70">How did you hear about us? *</label>
+                  <select 
+                    {...register("source")}
+                    className="w-full border-b border-[#2C2C2C]/20 py-2 bg-transparent focus:outline-none focus:border-[#C4856A] transition-colors rounded-none appearance-none"
+                  >
+                    <option value="">Select an option</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Google">Google</option>
+                    <option value="Friend Referral">Friend Referral</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {errors.source && <p className="text-red-500 text-xs mt-1">{errors.source.message}</p>}
                 </div>
 
                 <div className="space-y-2">

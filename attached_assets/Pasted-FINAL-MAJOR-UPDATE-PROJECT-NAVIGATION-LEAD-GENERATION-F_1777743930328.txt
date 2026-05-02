@@ -1,0 +1,201 @@
+FINAL MAJOR UPDATE — PROJECT NAVIGATION + LEAD GENERATION FOCUS
+
+UPDATE 1 — HOMEPAGE PROJECTS SECTION: NAME-WISE PROJECT CARDS
+On index.html, the Featured Projects section should work like this:
+Section heading: "Selected Work"
+Subtitle: "A glimpse into the spaces we have brought to life"
+
+Show 4 project cards on homepage — each card has:
+- Full bleed beautiful interior image
+- On hover: smooth dark overlay slides up showing:
+  → Project Name (e.g., "The Mehta Residence")
+  → Location (e.g., Bandra, Mumbai)
+  → Style tag (e.g., Modern Minimalist)
+- Clicking the card → redirects to that project's own page
+  (mehta-residence.html, kapoor-home.html etc.)
+- "New" badge on 1-2 cards (top left, small elegant)
+
+Below the 4 cards:
+"View All Projects →" — links to portfolio.html
+
+UPDATE 2 — INDIVIDUAL PROJECT PAGES
+Create a separate HTML page for each project. Example: mehta-residence.html
+Each project page layout:
+
+1. TOP — Full width hero image of the project (100% width, 70vh height)
+
+2. PROJECT INTRO BAR (below hero):
+   Left: Project name in large serif — "The Mehta Residence"
+   Right side details in small text:
+   - Location: Bandra, Mumbai
+   - Year: 2025
+   - Style: Modern Minimalist
+   - Space: Full Home — 3BHK
+   Thin horizontal line below this bar
+
+3. PROJECT DESCRIPTION:
+   Two column layout:
+   Left: Heading "About This Project" + 3-4 lines describing the project story, client brief, and design approach
+   Right: Design details list:
+   - Design Concept: Warm minimalism with natural textures
+   - Theme: Japandi-inspired calm
+   - Materials Used: Teak wood, linen, handmade ceramic tiles
+   - Colour Palette: 4-5 small colour swatch circles in actual project colours
+
+4. PHOTO GALLERY:
+   Heading: "Project Gallery"
+   Masonry grid layout (Pinterest-style) — images of different heights arranged in 3 columns
+   All project photos displayed here
+   Click on any image → opens a lightbox (full screen image viewer with prev/next arrows)
+
+5. LEAD GENERATION AT BOTTOM OF EVERY PROJECT PAGE:
+   Full width warm-toned banner section:
+   Heading: "Love This Style?"
+   Subtext: "Let's create something this beautiful for your home. Book a free consultation and let's start your journey."
+   Two buttons side by side:
+   → "Book Free Consultation" (solid terracotta button — opens WhatsApp)
+   → "Send Us Your Requirements" (outlined button — scrolls to enquiry form or links to contact.html)
+
+6. BACK NAVIGATION:
+   Top left: "← Back to Portfolio" link
+   Also show 2-3 "You May Also Like" project cards at the very bottom before footer
+
+UPDATE 3 — PORTFOLIO PAGE (portfolio.html) COMPLETE STRUCTURE
+Page heading: "Our Work"
+Subtitle: "Every project tells a story. Here are ours."
+
+Filter tabs (by style, not room type):
+[ All ] [ Modern ] [ Minimalist ] [ Contemporary ] [ Traditional ] [ Eclectic ] [ Vastu-Inspired ]
+
+Project grid below — 3 column grid on desktop, 1 column on mobile
+Each card:
+- Project name (not room type)
+- Location
+- Style tag
+- Hover effect with overlay
+- Click → goes to individual project page
+
+Sample projects to create pages for:
+1. The Mehta Residence — Bandra, Mumbai — Modern Minimalist
+2. Kapoor Family Home — Pune — Contemporary
+3. The Sharma Suite — Thane — Minimalist
+4. Verma Penthouse — Navi Mumbai — Eclectic
+5. The Joshi Villa — Ambernath — Traditional
+6. Arora Office Interiors — Mumbai — Modern
+7. The Singhania Apartment — Worli, Mumbai — Vastu-Inspired
+8. Patel Beach House — Alibaug — Contemporary
+
+All 8 cards on portfolio page.
+Homepage shows only first 4 as featured.
+
+UPDATE 4 — LEAD GENERATION BUILT INTO EVERY PAGE
+This website's main goal is getting enquiries. Add these lead tools on EVERY page:
+A. FLOATING WHATSAPP BUTTON — on all pages
+Position: fixed, bottom right
+Pre-filled message: "Hi! I saw your website and I'm interested in interior design services for my home. Can we discuss?"
+Always visible, never hidden
+
+B. STICKY BOTTOM CTA BAR — on all pages
+Thin bar at very bottom of screen (above WhatsApp button):
+Text: "Ready to transform your space? →"
+Button: "Book Free Consultation" — clicking opens WhatsApp
+Show on all pages. Dismiss button (X) on right. Comes back after 30 minutes using localStorage.
+
+C. TIMED POPUP — on homepage and portfolio page only
+Appears after 20 seconds
+Heading: "Thinking of redesigning your home?"
+Subtext: "Get a FREE 30-minute design consultation with our expert — no commitment needed."
+Form fields: Name, Phone Number, Best Time to Call (Morning / Afternoon / Evening dropdown)
+Button: "Yes! Book My Free Call" — submits and opens WhatsApp with their name pre-filled
+Close X button
+Only shows once per session (sessionStorage)
+
+D. EXIT INTENT POPUP — on homepage only
+When user moves mouse towards top of browser (about to close tab):
+Popup appears: "Wait — before you go!"
+Subtext: "Let us show you what we can do with your space. Get a free moodboard for your home."
+Field: Just phone number
+Button: "Send Me a Free Moodboard" — opens WhatsApp
+This catches users who are about to leave
+
+E. END OF EVERY PROJECT PAGE — Lead Banner
+(Already described in Update 2 above)
+"Love This Style? Book Free Consultation"
+
+F. CONTACT PAGE (contact.html) — Full Lead Page
+This entire page is built for conversions:
+
+Top section:
+Heading: "Let's Build Your Dream Space"
+Subtext: "Tell us about your project and we'll get back to you within 24 hours."
+
+Two column layout:
+LEFT — Enquiry Form:
+- Full Name (required)
+- Phone Number (required)
+- Email Address
+- City / Area (required)
+- Type of Project (dropdown): Full Home / Bedroom / Living Room / Kitchen / Office / Commercial / Renovation / Other
+- Budget Range (dropdown): Under ₹5 Lakh / ₹5–10 Lakh / ₹10–20 Lakh / ₹20 Lakh+ / Not Decided Yet
+- How did you hear about us (dropdown): Instagram / Google / Friend Referral / WhatsApp / Other
+- Project Description (textarea): "Tell us more about your space and what you're looking for..."
+- Preferred Callback Time (dropdown): Morning 9am–12pm / Afternoon 12pm–4pm / Evening 4pm–8pm
+- Submit button: "Send My Enquiry" — solid terracotta, full width
+
+RIGHT — Contact Details + Trust Builders:
+Studio name + tagline
+Phone: +91 99999 99999
+Email: nivorainteriors@gmail.com
+Location: Ambernath, Maharashtra (serving Mumbai, Thane, Navi Mumbai, Pune)
+WhatsApp direct link button: "Chat on WhatsApp →"
+
+Below contact details — Trust section:
+3 small boxes:
+→ "Free Initial Consultation" — No charges for the first meeting
+→ "24-Hour Response" — We reply to all enquiries within a day
+→ "Serving All of Mumbai" — We travel to your location
+
+G. ANNOUNCEMENT BANNER — homepage only
+Top strip (terracotta background):
+"✦ Now accepting new projects for 2026 — Limited slots available — Book your free consultation today ✦"
+Dismiss X on right
+
+UPDATE 5 — HOMEPAGE FLOW FOR MAXIMUM LEAD GENERATION
+Structure index.html in this exact order for best conversion:
+1. Announcement Banner (urgency — limited slots)
+2. Navigation Bar
+3. Hero Section — full screen, headline, CTA button "Book Free Consultation" 
+4. Trust Bar — thin strip below hero:
+   "50+ Projects Completed  |  7 Years Experience  |  Mumbai's Trusted Studio  |  Free First Consultation"
+5. Intro / About Snippet — personal, warm, "Read Our Story →"
+6. Featured Projects — 4 cards, click goes to project page
+7. Marquee Strip — scrolling text
+8. Services Overview — 4 services listed simply, "See All Services →"
+9. How We Work — Step 01 teaser only, "See Full Process →"
+10. Stats Counter — 50+ Projects, 7 Years, 200+ Clients, 12 Cities
+11. Testimonials — 2-3 reviews
+12. Instagram Feed Section
+13. Full Enquiry Form — "Let's Start Your Project"
+14. Footer
+
+UPDATE 6 — WHATSAPP INTEGRATION ON ALL BUTTONS
+Every CTA button on the website that says "Book Free Consultation" or "Get a Quote" should open WhatsApp directly:
+All such buttons should use this link format:
+href="https://wa.me/91XXXXXXXXXX?text=Hi!%20I%20saw%20your%20website%20and%20I'm%20interested%20in%20interior%20design%20services.%20Can%20we%20discuss%20my%20project%3F"
+target="_blank"
+
+Replace XXXXXXXXXX with actual phone number when client provides it.
+
+Buttons that open WhatsApp:
+- Hero CTA "Book Free Consultation"
+- Sticky bottom bar button
+- Floating WhatsApp bubble
+- "Love This Style?" button on project pages
+- Timed popup submit button
+- Exit intent popup button
+- Any "Get a Quote" button across the site
+
+Enquiry Form (contact.html) submit button behaviour:
+On submit → show a thank you message on screen:
+"Thank you! We have received your enquiry and will call you back within 24 hours. You can also reach us directly on WhatsApp."
++ a WhatsApp button appears below the thank you message

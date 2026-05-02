@@ -6,7 +6,21 @@ export function StickyCTA() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const isDismissed = sessionStorage.getItem("stickyCTADismissed");
+    const rawData = localStorage.getItem("nivoraCTADismissed");
+    let isDismissed = false;
+
+    if (rawData) {
+      try {
+        const data = JSON.parse(rawData);
+        if (data.time && Date.now() - data.time < 30 * 60 * 1000) {
+          isDismissed = true;
+        } else {
+          localStorage.removeItem("nivoraCTADismissed");
+        }
+      } catch (e) {
+        localStorage.removeItem("nivoraCTADismissed");
+      }
+    }
     
     const handleScroll = () => {
       // Show after scrolling down a bit, hide if near bottom (footer)
@@ -26,15 +40,11 @@ export function StickyCTA() {
 
   const handleDismiss = () => {
     setIsVisible(false);
-    sessionStorage.setItem("stickyCTADismissed", "true");
+    localStorage.setItem("nivoraCTADismissed", JSON.stringify({ time: Date.now() }));
   };
 
-  const scrollToContact = () => {
-    const el = document.querySelector("#contact");
-    if (el) {
-      const offset = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: offset, behavior: "smooth" });
-    }
+  const handleCTA = () => {
+    window.open("https://wa.me/919999999999?text=Hi!%20I%20am%20ready%20to%20transform%20my%20space.%20Can%20we%20book%20a%20free%20consultation%3F", "_blank");
   };
 
   return (
@@ -49,12 +59,12 @@ export function StickyCTA() {
         >
           <div className="container mx-auto px-6 md:px-12 py-3 flex items-center justify-between gap-4">
             <p className="font-sans text-[#F9F5F0] text-sm uppercase tracking-widest hidden md:block">
-              Let's design your space →
+              Ready to transform your space? →
             </p>
             
             <div className="flex items-center justify-between w-full md:w-auto gap-4">
               <button
-                onClick={scrollToContact}
+                onClick={handleCTA}
                 className="bg-[#F9F5F0] text-[#2C2C2C] px-6 py-2 text-xs font-sans uppercase tracking-wider hover:bg-[#C4856A] hover:text-white transition-colors"
               >
                 Book Free Consultation

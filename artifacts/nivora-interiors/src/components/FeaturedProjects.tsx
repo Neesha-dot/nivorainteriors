@@ -3,41 +3,7 @@ import { useInView } from "react-intersection-observer";
 import { useState } from "react";
 import { Link } from "wouter";
 import { AnimatedHeading } from "./AnimatedHeading";
-
-const PROJECTS = [
-  {
-    id: 1,
-    title: "The Mehta Residence",
-    location: "Bandra, Mumbai",
-    style: "Modern",
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
-    isNew: false,
-  },
-  {
-    id: 2,
-    title: "Kapoor Family Home",
-    location: "Pune",
-    style: "Contemporary",
-    image: "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&q=80",
-    isNew: false,
-  },
-  {
-    id: 3,
-    title: "The Sharma Suite",
-    location: "Thane",
-    style: "Minimalist",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80",
-    isNew: true,
-  },
-  {
-    id: 4,
-    title: "Verma Penthouse",
-    location: "Navi Mumbai",
-    style: "Eclectic",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
-    isNew: true,
-  },
-];
+import { FEATURED_PROJECTS } from "@/data/projects";
 
 function ProjectCard({ project, index, inView }: any) {
   const [tiltStyle, setTiltStyle] = useState({ transform: "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)" });
@@ -65,7 +31,7 @@ function ProjectCard({ project, index, inView }: any) {
   };
 
   return (
-    <Link href="/portfolio" className="block">
+    <Link href={`/projects/${project.slug}`} className="block">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
@@ -109,13 +75,14 @@ export function FeaturedProjects({ limit, showViewAll }: { limit?: number, showV
     threshold: 0.1,
   });
 
-  const displayProjects = limit ? PROJECTS.slice(0, limit) : PROJECTS;
+  const displayProjects = limit ? FEATURED_PROJECTS.slice(0, limit) : FEATURED_PROJECTS;
 
   return (
     <section className="py-24 md:py-32 bg-white" ref={ref}>
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
-        <div className="flex flex-col items-center mb-16">
-          <AnimatedHeading text="Selected Work" className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-6" />
+        <div className="flex flex-col items-center mb-16 text-center">
+          <AnimatedHeading text="Selected Work" className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-3" />
+          <p className="font-sans text-[#2C2C2C]/60 text-base mb-6">A glimpse into the spaces we have brought to life</p>
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             animate={inView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}

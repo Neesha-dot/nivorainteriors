@@ -21,6 +21,8 @@ import { PortfolioPage } from "./pages/PortfolioPage";
 import { ServicesPage } from "./pages/ServicesPage";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
+import { ProjectDetailPage } from "./pages/ProjectDetailPage";
+import { ExitIntentPopup } from "./components/ExitIntentPopup";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +62,7 @@ function App() {
             <Switch>
               <Route path="/" component={() => <HomePage introComplete={introComplete} />} />
               <Route path="/portfolio" component={PortfolioPage} />
+              <Route path="/projects/:slug" component={ProjectDetailPage} />
               <Route path="/services" component={ServicesPage} />
               <Route path="/about" component={AboutPage} />
               <Route path="/contact" component={ContactPage} />
@@ -70,6 +73,7 @@ function App() {
             <FloatingWhatsApp />
             <PopupLeadForm />
             <StickyCTA />
+            <ExitIntentPopup />
           </div>
         </Router>
         <Toaster />
