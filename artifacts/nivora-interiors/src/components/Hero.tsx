@@ -39,9 +39,10 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
           initial={{ opacity: 0, y: 20 }}
           animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-12 max-w-4xl leading-tight"
+          className="font-serif text-white mb-12 text-center leading-[1.2] mx-auto"
+          style={{ fontSize: "clamp(3.5rem, 5.5vw, 6rem)", maxWidth: "800px" }}
         >
-          Spaces That Speak Your Story
+          Spaces That Speak<br />Your Story
         </motion.h1>
 
         <motion.button
