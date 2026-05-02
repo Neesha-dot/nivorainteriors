@@ -1,0 +1,221 @@
+Build a complete, luxurious Interior Design Portfolio Website for Nivora Interiors — an Indian interior design studio. The website should feel high-end, editorial, and refined — inspired by the aesthetic of top London design studios like Beata Heuman, Studio Ashby, Henri Fitzwilliam-Lay, Soane Britain, Matilda Goad, Ben Pentreath, Luke Edward Hall, Suzy Hoodless, and Taylor Howes — but grounded in an Indian context with warm, rich tones.
+
+TECH STACK:
+
+HTML, CSS, JavaScript (vanilla)
+No frameworks needed
+Fully responsive — mobile, tablet, desktop
+Smooth scroll behaviour throughout
+All in one single HTML file or cleanly separated HTML + CSS + JS files
+
+
+BRAND FEEL & AESTHETIC:
+
+Elegant, warm, editorial — like a luxury design magazine
+Colour palette: warm off-white / cream background (#F9F5F0), deep charcoal text (#2C2C2C), warm terracotta or dusty rose accent (#C4856A or similar), muted gold for fine details
+Typography: Use Google Fonts — a serif font for headings (like "Cormorant Garamond" or "Playfair Display") paired with a clean sans-serif for body text (like "Jost" or "DM Sans")
+Lots of white space, full-width imagery, subtle hover animations
+No loud colours, no gradients — clean, timeless, sophisticated
+Thin borders, fine lines, understated elegance
+
+
+PAGES TO BUILD (Single Page Scroll with smooth anchor navigation):
+1. NAVIGATION BAR
+
+Logo on the left: "Nivora Interiors" in serif font
+Menu links on the right: Home, Portfolio, Services, About, Contact
+On mobile: hamburger menu
+Sticky on scroll, becomes slightly translucent with a thin bottom border on scroll
+Thin announcement strip above the nav: "Now accepting new projects — Book a Free Consultation" with a subtle link
+
+
+2. HOMEPAGE — HERO SECTION
+
+Full screen (100vh) hero with a large interior photo as background
+Big serif headline overlaid: "Spaces That Speak Your Story" (or similar elegant tagline)
+Subtext: "Interior Design Studio — Mumbai, India"
+One CTA button: "Explore Our Work" — outlined style, no fill, white text
+Subtle scroll-down arrow animation at the bottom
+
+
+3. INTRO / ABOUT SNIPPET (Homepage)
+
+Two column layout: left side large portrait/studio image, right side text
+Heading: "We design spaces that feel like you"
+Short paragraph about the studio — warm, personal tone
+Small link: "Read our story →"
+Inspired by how Beata Heuman and Studio Ashby introduce themselves — personal, not corporate
+
+
+4. FEATURED PROJECTS SECTION
+
+Section heading: "Selected Work" in serif, centred, with a thin decorative line
+Grid of 3–4 project cards
+Each card: full bleed image, on hover — overlay with project name + location + style tag (e.g., "Modern Minimalist — Bandra, Mumbai")
+"New" badge on select projects (top left corner, small, elegant)
+Below the grid: "View All Projects →" link
+
+
+5. SERVICES SECTION
+
+Clean, editorial layout — not boxed cards, more like a list/editorial style
+Section heading: "What We Do"
+Services listed with a thin horizontal line between each:
+
+Full Home Interior Design
+Modular Kitchen Design
+Bedroom Design
+Living & Dining Design
+Commercial / Office Interiors
+Vastu-Compliant Design
+3D Visualisation / Walkthrough
+Renovation Consulting
+
+
+Each service: Name on left, short 1-line description on right, and a small "Enquire →" link
+Pricing note at the bottom: "Pricing starting from ₹X or custom quote on request"
+Inspired by Suzy Hoodless and Taylor Howes services layout
+
+
+6. PORTFOLIO / PROJECTS PAGE SECTION
+
+Full projects grid with filter tabs at top: All | Living Room | Bedroom | Kitchen | Office | Full Home | Commercial
+Each project card: image, project name, location, style tag
+On click: opens a project detail view (can be a modal or a separate section that expands) showing:
+
+Multiple project photos in a gallery/slider
+Project name & location
+Design style (Modern, Minimalist, Traditional, Eclectic, Contemporary)
+Theme & concept
+Materials used
+Space type
+Colour palette swatches
+Short project description
+"Love this style? Let's create something similar → Get a Quote" button at the bottom
+
+
+Inspired by Henri Fitzwilliam-Lay and Martin Kemp Design portfolio layouts
+
+
+7. TESTIMONIALS SECTION
+
+Clean, minimal — white background section
+Section heading: "What Our Clients Say"
+2–3 testimonial cards in a row (or a simple horizontal slider)
+Each: client name, project type, and review text in italic serif font
+Subtle quote mark decoration
+Inspired by Anna Spiro / Soane Britain's testimonial style
+
+
+8. INSTAGRAM / REELS FEED SECTION
+
+Section heading: "Follow Our Journey — @nivorainteriors"
+A row of 4–6 square image placeholders styled like Instagram posts
+Each has a subtle hover overlay with an Instagram icon
+Link to Instagram profile below: "See more on Instagram →"
+Note in code comments: "Replace placeholder images with actual Instagram embed or real photos"
+
+
+9. LEAD GENERATION — HOMEPAGE ENQUIRY FORM
+
+Section heading: "Let's Start Your Project"
+Clean, minimal form — full width or centred with generous padding
+Fields: Full Name, Phone Number, Email Address, City, Type of Space (dropdown: Living Room / Bedroom / Kitchen / Office / Full Home / Commercial / Other), Project Description (textarea), Preferred Callback Time (dropdown: Morning / Afternoon / Evening)
+Submit button: "Send Enquiry" — solid terracotta/accent colour
+Below form: WhatsApp direct link button — "Or chat with us on WhatsApp →" (with WhatsApp icon)
+
+
+10. ABOUT PAGE SECTION
+
+Full-width section
+Two column layout: large image left, text right
+Designer name as heading
+Story paragraph — personal, warm
+Small detail line: "Based in Mumbai | Working across India"
+List of credentials or approach points (3–4 bullet points, elegant style)
+Second image below if needed
+
+
+11. FOOTER
+
+Clean, minimal footer — dark background (charcoal #2C2C2C), light text
+Logo + tagline on left: "Nivora Interiors — From Vision to Execution"
+Links in centre: Home, Portfolio, Services, About, Contact
+Contact details on right: phone numbers, email, location (Ambernath, Maharashtra)
+Social icons: Instagram, WhatsApp
+Bottom line: "© 2026 Nivora Interiors. Website by VyuhX Technologies"
+Thin top border in accent colour
+
+
+INTERACTIVE FEATURES TO BUILD:
+A. Floating WhatsApp Button
+
+Fixed position, bottom right corner
+WhatsApp green icon in a circle
+On click: opens WhatsApp with pre-filled message: "Hi! I'm interested in interior design services. Can we discuss my project?"
+Replace XXXXXXXXXX with actual number in the href
+
+B. Timed Popup Lead Form
+
+Appears after 15–20 seconds on the page
+Overlay with a centred modal
+Heading: "Planning your dream home?"
+Subtext: "Get a FREE 30-min Design Consultation"
+Fields: Name, Phone Number, Space Type (dropdown)
+Button: "Book My Free Consultation"
+Close button (X) top right
+Only shows once per session (use sessionStorage)
+
+C. Sticky CTA Strip
+
+Fixed at the very bottom of the screen (above WhatsApp button)
+Thin bar: "Let's design your space → Book Free Consultation" — with a button that opens WhatsApp or scrolls to the form
+Dismiss (X) button on the right
+
+D. Announcement Banner
+
+Top of page, above nav
+Thin strip: "Now accepting new projects for 2026 — Book a Free Consultation Today"
+Dismiss (X) button
+Accent background colour (terracotta/dusty rose)
+
+E. Project Filter
+
+Working filter tabs in the portfolio section
+On click of each tab, only show projects matching that category
+Smooth fade transition when filtering
+
+F. Scroll Animations
+
+Sections fade in gently as user scrolls down (use Intersection Observer API)
+No jarring or fast animations — everything should feel slow and elegant
+
+
+PLACEHOLDER CONTENT TO USE:
+
+Use placeholder images from Unsplash (search: interior design, luxury home India) — use direct Unsplash URLs
+Studio name: Nivora Interiors
+Location: Ambernath / Mumbai, Maharashtra, India
+Email: nivorainteriors@gmail.com (placeholder)
+Phone: +91 XXXXXXXXXX
+Instagram: @nivorainteriors
+
+
+INDIA-SPECIFIC TOUCHES:
+
+Currency shown as ₹ (not $)
+Vastu-Compliant Design listed as a service (very relevant for Indian clients)
+Space types include: Pooja Room, Full Home (2BHK / 3BHK), Commercial Shops
+City references: Mumbai, Pune, Thane, Navi Mumbai, Ambernath
+WhatsApp as primary contact method (most used in India)
+Form includes City field and Callback Time (Indian clients prefer calling)
+
+
+CODE QUALITY:
+
+Well commented code — explain each section clearly
+Use CSS variables at the top for all colours and fonts so they are easy to change
+Smooth scroll behaviour
+All images should have alt text
+Forms should have basic validation (required fields, email format check)
+Mobile first — everything must work perfectly on a phone screen
