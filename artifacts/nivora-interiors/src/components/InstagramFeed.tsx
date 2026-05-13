@@ -27,12 +27,12 @@ export function InstagramFeed() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <AnimatedHeading text="Follow Our Journey" className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-2" />
+          <AnimatedHeading text="Follow Our Journey" className="font-serif text-4xl md:text-5xl text-[#21291a] mb-2" />
           <a 
             href="https://www.instagram.com/nivorainteriors" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="font-sans text-[#C4856A] uppercase tracking-widest text-sm hover:text-[#2C2C2C] transition-colors cursor-hover"
+            className="font-sans text-[#a18661] uppercase tracking-widest text-sm hover:text-[#21291a] transition-colors cursor-hover"
           >
             @nivorainteriors
           </a>
@@ -55,7 +55,7 @@ export function InstagramFeed() {
                 alt="Instagram post"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-[#2C2C2C]/0 group-hover:bg-[#2C2C2C]/40 transition-colors duration-300 flex items-center justify-center">
+              <div className="absolute inset-0 bg-[#21291a]/0 group-hover:bg-[#21291a]/40 transition-colors duration-300 flex items-center justify-center">
                 <Instagram className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-4 group-hover:translate-y-0" size={32} />
               </div>
             </motion.a>
@@ -72,9 +72,9 @@ export function InstagramFeed() {
             href="https://www.instagram.com/nivorainteriors"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 text-[#2C2C2C] font-sans font-medium uppercase tracking-wider text-sm hover:text-[#C4856A] transition-colors cursor-hover"
+            className="group flex items-center gap-2 text-[#21291a] font-sans font-medium uppercase tracking-wider text-sm hover:text-[#a18661] transition-colors cursor-hover"
           >
-            <span className="border-b border-transparent group-hover:border-[#C4856A] pb-0.5 transition-colors">See more on Instagram</span>
+            <span className="border-b border-transparent group-hover:border-[#a18661] pb-0.5 transition-colors">See more on Instagram</span>
             <span className="group-hover:translate-x-1 transition-transform">→</span>
           </a>
         </motion.div>

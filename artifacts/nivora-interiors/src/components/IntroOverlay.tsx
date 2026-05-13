@@ -45,9 +45,9 @@ export function IntroOverlay({ onComplete }: { onComplete: () => void }) {
     <AnimatePresence>
       {!isTypingComplete ? (
         <motion.div
-          className="fixed inset-0 z-[100] bg-[#F9F5F0] flex items-center justify-center"
+          className="fixed inset-0 z-[100] bg-[#f5f2ed] flex items-center justify-center"
         >
-          <h1 className="font-serif text-4xl md:text-6xl text-[#2C2C2C] tracking-wide">
+          <h1 className="font-serif text-4xl md:text-6xl text-[#21291a] tracking-wide">
             {text}
           </h1>
         </motion.div>
@@ -58,9 +58,9 @@ export function IntroOverlay({ onComplete }: { onComplete: () => void }) {
           animate={{ y: "-100%" }}
           transition={{ duration: 0.8, ease: [0.65, 0, 0.35, 1] }}
           onAnimationComplete={handleAnimationComplete}
-          className="fixed inset-0 z-[100] bg-[#F9F5F0] flex items-center justify-center"
+          className="fixed inset-0 z-[100] bg-[#f5f2ed] flex items-center justify-center"
         >
-          <h1 className="font-serif text-4xl md:text-6xl text-[#2C2C2C] tracking-wide">
+          <h1 className="font-serif text-4xl md:text-6xl text-[#21291a] tracking-wide">
             {fullText}
           </h1>
         </motion.div>

@@ -55,17 +55,17 @@ export function StickyCTA() {
           animate={{ y: 0 }}
           exit={{ y: "100%" }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          className="fixed bottom-0 left-0 right-0 z-[45] bg-[#2C2C2C] border-t border-white/10"
+          className="fixed bottom-0 left-0 right-0 z-[45] bg-[#21291a] border-t border-white/10"
         >
           <div className="container mx-auto px-6 md:px-12 py-3 flex items-center justify-between gap-4">
-            <p className="font-sans text-[#F9F5F0] text-sm uppercase tracking-widest hidden md:block">
+            <p className="font-sans text-[#f5f2ed] text-sm uppercase tracking-widest hidden md:block">
               Ready to transform your space? →
             </p>
             
             <div className="flex items-center justify-between w-full md:w-auto gap-4">
               <button
                 onClick={handleCTA}
-                className="bg-[#F9F5F0] text-[#2C2C2C] px-6 py-2 text-xs font-sans uppercase tracking-wider hover:bg-[#C4856A] hover:text-white transition-colors"
+                className="bg-[#f5f2ed] text-[#21291a] px-6 py-2 text-xs font-sans uppercase tracking-wider hover:bg-[#a18661] hover:text-white transition-colors"
               >
                 Book Free Consultation
               </button>

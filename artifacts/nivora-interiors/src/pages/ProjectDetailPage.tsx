@@ -40,10 +40,10 @@ export function ProjectDetailPage() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F9F5F0]">
+      <div className="min-h-screen flex items-center justify-center bg-[#f5f2ed]">
         <div className="text-center">
-          <h1 className="font-serif text-4xl text-[#2C2C2C] mb-4">Project Not Found</h1>
-          <Link href="/portfolio" className="text-[#C4856A] uppercase tracking-widest text-sm hover:underline">
+          <h1 className="font-serif text-4xl text-[#21291a] mb-4">Project Not Found</h1>
+          <Link href="/portfolio" className="text-[#a18661] uppercase tracking-widest text-sm hover:underline">
             ← Back to Portfolio
           </Link>
         </div>
@@ -71,18 +71,18 @@ export function ProjectDetailPage() {
       </div>
 
       {/* Project Intro Bar */}
-      <div className="bg-[#F9F5F0] py-12">
+      <div className="bg-[#f5f2ed] py-12">
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-8">
-            <h1 className="font-serif text-4xl md:text-5xl text-[#2C2C2C]">{project.title}</h1>
+            <h1 className="font-serif text-4xl md:text-5xl text-[#21291a]">{project.title}</h1>
             <div className="flex flex-col md:text-right gap-2">
-              <div className="font-sans text-sm"><span className="text-[#2C2C2C]/50 uppercase tracking-widest mr-2">Location</span> {project.location}</div>
-              <div className="font-sans text-sm"><span className="text-[#2C2C2C]/50 uppercase tracking-widest mr-2">Year</span> {project.year}</div>
-              <div className="font-sans text-sm"><span className="text-[#2C2C2C]/50 uppercase tracking-widest mr-2">Style</span> {project.style}</div>
-              <div className="font-sans text-sm"><span className="text-[#2C2C2C]/50 uppercase tracking-widest mr-2">Space Type</span> {project.spaceType}</div>
+              <div className="font-sans text-sm"><span className="text-[#21291a]/50 uppercase tracking-widest mr-2">Location</span> {project.location}</div>
+              <div className="font-sans text-sm"><span className="text-[#21291a]/50 uppercase tracking-widest mr-2">Year</span> {project.year}</div>
+              <div className="font-sans text-sm"><span className="text-[#21291a]/50 uppercase tracking-widest mr-2">Style</span> {project.style}</div>
+              <div className="font-sans text-sm"><span className="text-[#21291a]/50 uppercase tracking-widest mr-2">Space Type</span> {project.spaceType}</div>
             </div>
           </div>
-          <div className="w-full h-px bg-[#C4856A]/30" />
+          <div className="w-full h-px bg-[#a18661]/30" />
         </div>
       </div>
 
@@ -91,22 +91,22 @@ export function ProjectDetailPage() {
         <div className="container mx-auto px-6 max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
             <div>
-              <h2 className="font-serif text-2xl text-[#2C2C2C] mb-6">About This Project</h2>
-              <p className="font-sans text-lg text-[#2C2C2C]/80 leading-relaxed">
+              <h2 className="font-serif text-2xl text-[#21291a] mb-6">About This Project</h2>
+              <p className="font-sans text-lg text-[#21291a]/80 leading-relaxed">
                 {project.description}
               </p>
             </div>
-            <div className="bg-[#F9F5F0] p-8 space-y-8">
+            <div className="bg-[#f5f2ed] p-8 space-y-8">
               <div>
-                <h3 className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/50 mb-2">Design Concept</h3>
-                <p className="font-serif text-lg text-[#2C2C2C]">{project.concept}</p>
+                <h3 className="font-sans text-xs uppercase tracking-widest text-[#21291a]/50 mb-2">Design Concept</h3>
+                <p className="font-serif text-lg text-[#21291a]">{project.concept}</p>
               </div>
               <div>
-                <h3 className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/50 mb-2">Materials Used</h3>
-                <p className="font-sans text-[#2C2C2C]">{project.materials}</p>
+                <h3 className="font-sans text-xs uppercase tracking-widest text-[#21291a]/50 mb-2">Materials Used</h3>
+                <p className="font-sans text-[#21291a]">{project.materials}</p>
               </div>
               <div>
-                <h3 className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/50 mb-4">Colour Palette</h3>
+                <h3 className="font-sans text-xs uppercase tracking-widest text-[#21291a]/50 mb-4">Colour Palette</h3>
                 <div className="flex gap-4">
                   {project.colors.map((color, i) => (
                     <div key={i} className="w-8 h-8 rounded-full border border-black/10" style={{ backgroundColor: color }} />
@@ -119,9 +119,9 @@ export function ProjectDetailPage() {
       </div>
 
       {/* Photo Gallery */}
-      <div className="py-20 bg-[#F9F5F0]">
+      <div className="py-20 bg-[#f5f2ed]">
         <div className="container mx-auto px-6 max-w-7xl">
-          <h2 className="font-serif text-3xl text-[#2C2C2C] mb-10 text-center">Project Gallery</h2>
+          <h2 className="font-serif text-3xl text-[#21291a] mb-10 text-center">Project Gallery</h2>
           {project.gallery.length === 1 ? (
             <div className="w-full aspect-[16/9] overflow-hidden cursor-pointer" onClick={() => openLightbox(0)}>
               <img src={project.gallery[0]} alt="Gallery image" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
@@ -169,7 +169,7 @@ export function ProjectDetailPage() {
       </AnimatePresence>
 
       {/* Lead Banner */}
-      <div className="bg-[#C4856A] py-24 w-full">
+      <div className="bg-[#a18661] py-24 w-full">
         <div className="container mx-auto px-6 text-center">
           <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">Love This Style?</h2>
           <p className="font-sans text-lg text-white/80 mb-10 max-w-2xl mx-auto">
@@ -180,7 +180,7 @@ export function ProjectDetailPage() {
               href={`https://wa.me/919999999999?text=${whatsappText}`} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="bg-white text-[#2C2C2C] px-8 py-4 font-sans text-sm uppercase tracking-wider hover:bg-[#F9F5F0] transition-colors"
+              className="bg-white text-[#21291a] px-8 py-4 font-sans text-sm uppercase tracking-wider hover:bg-[#f5f2ed] transition-colors"
             >
               Book Free Consultation
             </a>
@@ -198,16 +198,16 @@ export function ProjectDetailPage() {
       {relatedProjects.length > 0 && (
         <div className="py-20 bg-white">
           <div className="container mx-auto px-6 max-w-7xl">
-            <h2 className="font-serif text-3xl text-[#2C2C2C] mb-10 text-center">You May Also Like</h2>
+            <h2 className="font-serif text-3xl text-[#21291a] mb-10 text-center">You May Also Like</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedProjects.map(p => (
                 <Link key={p.id} href={`/projects/${p.slug}`} className="group block cursor-pointer">
                   <div className="aspect-[4/3] overflow-hidden mb-4">
                     <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   </div>
-                  <h3 className="font-serif text-2xl text-[#2C2C2C] mb-1">{p.title}</h3>
-                  <p className="font-sans text-xs uppercase tracking-widest text-[#2C2C2C]/60">{p.location}</p>
-                  <div className="mt-3 inline-block border border-[#C4856A] text-[#C4856A] text-[10px] uppercase tracking-wider px-2 py-1">
+                  <h3 className="font-serif text-2xl text-[#21291a] mb-1">{p.title}</h3>
+                  <p className="font-sans text-xs uppercase tracking-widest text-[#21291a]/60">{p.location}</p>
+                  <div className="mt-3 inline-block border border-[#a18661] text-[#a18661] text-[10px] uppercase tracking-wider px-2 py-1">
                     {p.style}
                   </div>
                 </Link>

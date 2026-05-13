@@ -53,12 +53,12 @@ function ProjectCard({ project, index, inView }: any) {
         />
         
         {project.isNew && (
-          <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-sm text-[#2C2C2C] text-xs uppercase tracking-widest px-3 py-1 font-sans">
+          <div className="absolute top-6 left-6 z-20 bg-white/90 backdrop-blur-sm text-[#21291a] text-xs uppercase tracking-widest px-3 py-1 font-sans">
             New
           </div>
         )}
 
-        <div className="absolute inset-0 bg-[#2C2C2C]/85 p-8 flex flex-col justify-end translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10">
+        <div className="absolute inset-0 bg-[#21291a]/85 p-8 flex flex-col justify-end translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10">
           <p className="text-white/70 font-sans text-xs uppercase tracking-widest mb-2">
             {project.location} — {project.style}
           </p>
@@ -81,13 +81,13 @@ export function FeaturedProjects({ limit, showViewAll }: { limit?: number, showV
     <section className="py-24 md:py-32 bg-white" ref={ref}>
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         <div className="flex flex-col items-center mb-16 text-center">
-          <AnimatedHeading text="Selected Work" className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-3" />
-          <p className="font-sans text-[#2C2C2C]/60 text-base mb-6">A glimpse into the spaces we have brought to life</p>
+          <AnimatedHeading text="Selected Work" className="font-serif text-4xl md:text-5xl text-[#21291a] mb-3" />
+          <p className="font-sans text-[#21291a]/60 text-base mb-6">A glimpse into the spaces we have brought to life</p>
           <motion.div
             initial={{ opacity: 0, scaleX: 0 }}
             animate={inView ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-16 h-px bg-[#C4856A] origin-center"
+            className="w-16 h-px bg-[#a18661] origin-center"
           ></motion.div>
         </div>
 
@@ -106,9 +106,9 @@ export function FeaturedProjects({ limit, showViewAll }: { limit?: number, showV
           >
             <Link
               href="/portfolio"
-              className="group flex items-center gap-2 text-[#C4856A] font-sans font-medium uppercase tracking-wider text-sm cursor-hover"
+              className="group flex items-center gap-2 text-[#a18661] font-sans font-medium uppercase tracking-wider text-sm cursor-hover"
             >
-              <span className="border-b border-[#C4856A] pb-0.5 group-hover:border-transparent transition-colors">View All Projects</span>
+              <span className="border-b border-[#a18661] pb-0.5 group-hover:border-transparent transition-colors">View All Projects</span>
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
           </motion.div>

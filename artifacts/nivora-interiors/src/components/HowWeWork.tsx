@@ -38,8 +38,8 @@ function Step({ step, index }: { step: any, index: number }) {
   const isEven = index % 2 === 0;
 
   return (
-    <div className="relative py-20 md:py-28 overflow-hidden border-b border-[#2C2C2C]/10 last:border-b-0" ref={ref}>
-      <div className={`absolute top-1/2 -translate-y-1/2 ${isEven ? 'right-0' : 'left-0'} text-[#2C2C2C] opacity-[0.05] font-serif text-[180px] md:text-[240px] leading-none pointer-events-none select-none`}>
+    <div className="relative py-20 md:py-28 overflow-hidden border-b border-[#21291a]/10 last:border-b-0" ref={ref}>
+      <div className={`absolute top-1/2 -translate-y-1/2 ${isEven ? 'right-0' : 'left-0'} text-[#21291a] opacity-[0.05] font-serif text-[180px] md:text-[240px] leading-none pointer-events-none select-none`}>
         {step.number}
       </div>
       
@@ -51,9 +51,9 @@ function Step({ step, index }: { step: any, index: number }) {
             transition={{ duration: 0.8 }}
             className={`flex flex-col items-start ${!isEven ? 'md:order-last' : ''}`}
           >
-            <p className="font-sans text-sm uppercase tracking-widest text-[#C4856A] mb-4">Step {step.number}</p>
-            <h3 className="font-serif text-3xl md:text-4xl text-[#2C2C2C] mb-6">{step.title}</h3>
-            <p className="font-sans text-[#2C2C2C]/70 leading-relaxed">
+            <p className="font-sans text-sm uppercase tracking-widest text-[#a18661] mb-4">Step {step.number}</p>
+            <h3 className="font-serif text-3xl md:text-4xl text-[#21291a] mb-6">{step.title}</h3>
+            <p className="font-sans text-[#21291a]/70 leading-relaxed">
               {step.body}
             </p>
           </motion.div>
@@ -80,8 +80,8 @@ export function HowWeWork() {
   return (
     <section className="bg-white">
       <div className="pt-24 md:pt-32 pb-12 flex flex-col items-center text-center container mx-auto px-6">
-        <AnimatedHeading text="How We Work" className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-6" />
-        <div className="w-16 h-px bg-[#C4856A]"></div>
+        <AnimatedHeading text="How We Work" className="font-serif text-4xl md:text-5xl text-[#21291a] mb-6" />
+        <div className="w-16 h-px bg-[#a18661]"></div>
       </div>
       
       <div>

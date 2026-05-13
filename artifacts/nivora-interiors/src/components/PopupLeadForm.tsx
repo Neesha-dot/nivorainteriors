@@ -49,7 +49,7 @@ export function PopupLeadForm() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-[#2C2C2C]/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-[#21291a]/80 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
           />
           
@@ -57,25 +57,25 @@ export function PopupLeadForm() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative bg-[#F9F5F0] w-full max-w-md p-8 md:p-12 shadow-2xl z-10"
+            className="relative bg-[#f5f2ed] w-full max-w-md p-8 md:p-12 shadow-2xl z-10"
           >
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 p-2 text-[#2C2C2C]/50 hover:text-[#2C2C2C] transition-colors"
+              className="absolute top-4 right-4 p-2 text-[#21291a]/50 hover:text-[#21291a] transition-colors"
             >
               <X size={20} />
             </button>
 
             {isSuccess ? (
               <div className="text-center py-8">
-                <h3 className="font-serif text-3xl text-[#2C2C2C] mb-4">Thank You</h3>
-                <p className="font-sans text-[#2C2C2C]/70">We'll be in touch soon to schedule your consultation.</p>
+                <h3 className="font-serif text-3xl text-[#21291a] mb-4">Thank You</h3>
+                <p className="font-sans text-[#21291a]/70">We'll be in touch soon to schedule your consultation.</p>
               </div>
             ) : (
               <>
                 <div className="text-center mb-8">
-                  <h2 className="font-serif text-3xl text-[#2C2C2C] mb-2">Planning your dream home?</h2>
-                  <p className="font-sans text-[#C4856A] uppercase tracking-widest text-xs">Get a FREE 30-min Design Consultation</p>
+                  <h2 className="font-serif text-3xl text-[#21291a] mb-2">Planning your dream home?</h2>
+                  <p className="font-sans text-[#a18661] uppercase tracking-widest text-xs">Get a FREE 30-min Design Consultation</p>
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -83,20 +83,20 @@ export function PopupLeadForm() {
                     <input 
                       {...register("name")}
                       placeholder="Your Name"
-                      className="w-full border-b border-[#2C2C2C]/20 py-2 bg-transparent focus:outline-none focus:border-[#C4856A] transition-colors rounded-none"
+                      className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none"
                     />
                   </div>
                   <div>
                     <input 
                       {...register("phone")}
                       placeholder="Phone Number"
-                      className="w-full border-b border-[#2C2C2C]/20 py-2 bg-transparent focus:outline-none focus:border-[#C4856A] transition-colors rounded-none"
+                      className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none"
                     />
                   </div>
                   <div>
                     <select 
                       {...register("spaceType")}
-                      className="w-full border-b border-[#2C2C2C]/20 py-2 bg-transparent focus:outline-none focus:border-[#C4856A] transition-colors rounded-none appearance-none text-[#2C2C2C]/80"
+                      className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none appearance-none text-[#21291a]/80"
                     >
                       <option value="">Type of Space</option>
                       <option value="Residential">Residential</option>
@@ -106,7 +106,7 @@ export function PopupLeadForm() {
                   
                   <button 
                     type="submit"
-                    className="w-full py-4 bg-[#C4856A] text-white font-sans text-sm uppercase tracking-wider hover:bg-[#b0745b] transition-colors mt-4"
+                    className="w-full py-4 bg-[#a18661] text-white font-sans text-sm uppercase tracking-wider hover:bg-[#21291a] transition-colors mt-4"
                   >
                     Book My Free Consultation
                   </button>

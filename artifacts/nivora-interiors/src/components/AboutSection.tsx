@@ -33,7 +33,7 @@ export function AboutSection() {
   }, []);
 
   return (
-    <section id="about" className="py-24 md:py-32 bg-[#F9F5F0]" ref={ref}>
+    <section id="about" className="py-24 md:py-32 bg-[#f5f2ed]" ref={ref}>
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
           {/* Image */}
@@ -45,7 +45,7 @@ export function AboutSection() {
           >
             <div 
               ref={curtainRef}
-              className="absolute inset-0 bg-[#C4856A] z-10 origin-right"
+              className="absolute inset-0 bg-[#a18661] z-10 origin-right"
             />
             <img
               src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80"
@@ -61,15 +61,15 @@ export function AboutSection() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="flex flex-col items-start"
           >
-            <h2 className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-4">
+            <h2 className="font-serif text-4xl md:text-5xl text-[#21291a] mb-4">
               Kavya Nair, Principal Designer
             </h2>
             
-            <p className="font-sans text-sm uppercase tracking-widest text-[#C4856A] mb-8">
+            <p className="font-sans text-sm uppercase tracking-widest text-[#a18661] mb-8">
               Based in Mumbai | Working across India
             </p>
             
-            <p className="font-sans text-[#2C2C2C]/80 leading-relaxed mb-10 max-w-lg">
+            <p className="font-sans text-[#21291a]/80 leading-relaxed mb-10 max-w-lg">
               "Great design shouldn't feel like a museum. It should feel like an exhale—the moment you walk through your front door and know you are entirely, unmistakably home."
             </p>
 
@@ -81,8 +81,8 @@ export function AboutSection() {
                 "Committed to timelines, transparent pricing, and complete care"
               ].map((item, index) => (
                 <li key={index} className="flex items-start gap-4">
-                  <div className="mt-2 w-1.5 h-1.5 rounded-full bg-[#C4856A] shrink-0" />
-                  <span className="font-sans text-[#2C2C2C]">{item}</span>
+                  <div className="mt-2 w-1.5 h-1.5 rounded-full bg-[#a18661] shrink-0" />
+                  <span className="font-sans text-[#21291a]">{item}</span>
                 </li>
               ))}
             </ul>

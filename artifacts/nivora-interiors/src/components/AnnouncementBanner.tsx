@@ -24,7 +24,7 @@ export function AnnouncementBanner() {
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
-          className="bg-[#C4856A] text-[#F9F5F0] text-sm py-2 px-4 relative flex items-center justify-center font-sans"
+          className="bg-[#a18661] text-[#f5f2ed] text-sm py-2 px-4 relative flex items-center justify-center font-sans"
         >
           <p className="text-center tracking-wide">
             Now accepting new projects for 2026 — Book a Free Consultation Today

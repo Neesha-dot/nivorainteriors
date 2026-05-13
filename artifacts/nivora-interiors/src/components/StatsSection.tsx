@@ -57,11 +57,11 @@ function StatCounter({ stat, inView }: { stat: typeof STATS[0], inView: boolean 
 
   return (
     <div className="flex flex-col items-center text-center">
-      <div className="w-8 h-0.5 bg-[#C4856A] mb-4"></div>
-      <p className="font-serif text-6xl md:text-7xl text-[#2C2C2C] mb-2">
+      <div className="w-8 h-0.5 bg-[#a18661] mb-4"></div>
+      <p className="font-serif text-6xl md:text-7xl text-[#21291a] mb-2">
         {count}{stat.suffix}
       </p>
-      <p className="font-sans text-xs md:text-sm uppercase tracking-wider text-[#C4856A]">
+      <p className="font-sans text-xs md:text-sm uppercase tracking-wider text-[#a18661]">
         {stat.label}
       </p>
     </div>

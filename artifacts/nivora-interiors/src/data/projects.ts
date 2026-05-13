@@ -30,7 +30,7 @@ export const ALL_PROJECTS: Project[] = [
     description: "A serene, uncluttered living space designed for a family of three who wanted a calm sanctuary in the heart of bustling Bandra. We stripped back unnecessary ornamentation, focusing on natural light and tactile materials. Every surface invites touch; every corner invites rest.",
     concept: "Warm Minimalism — natural textures layered with deliberate restraint.",
     materials: "Travertine, Oak Wood, Linen, Brushed Brass",
-    colors: ["#E8E3DF", "#C4856A", "#8C837C", "#2C2C2C"],
+    colors: ["#E8E3DF", "#a18661", "#8C837C", "#21291a"],
     isNew: false, isFeatured: true
   },
   {
@@ -105,7 +105,7 @@ export const ALL_PROJECTS: Project[] = [
     description: "A 4,500 sqft commercial office designed to inspire productivity and reflect the brand's forward-thinking culture. Open-plan zones, acoustic pods, and a statement reception area. A workspace people actually want to spend time in.",
     concept: "Purposeful Energy — spaces that work as hard as the people in them.",
     materials: "Polished Concrete, Glass, Perforated Steel, Engineered Timber",
-    colors: ["#F0EEE9", "#3D3D3D", "#C4856A", "#A8B5A8"],
+    colors: ["#F0EEE9", "#3D3D3D", "#a18661", "#A8B5A8"],
     isNew: false, isFeatured: false
   },
   {
@@ -120,7 +120,7 @@ export const ALL_PROJECTS: Project[] = [
     description: "Every element of this home was designed in harmony with Vastu Shastra — from entry orientation to the placement of the Pooja room and master bedroom. Serenity is not an afterthought here; it is the architecture.",
     concept: "Sacred Harmony — ancient principles guiding modern living.",
     materials: "Kota Stone, Copper Accents, Natural Linen, Sandalwood Teak",
-    colors: ["#FFF8E7", "#C4956A", "#6B5344", "#2C2C2C"],
+    colors: ["#FFF8E7", "#C4956A", "#6B5344", "#21291a"],
     isNew: true, isFeatured: false
   },
   {

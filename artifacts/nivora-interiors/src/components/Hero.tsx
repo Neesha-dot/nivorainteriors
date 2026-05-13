@@ -49,7 +49,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         >
           <button
             onClick={handleCTA}
-            className="border border-white text-white px-8 py-4 uppercase tracking-wider text-sm font-sans hover:bg-white hover:text-[#2C2C2C] transition-all duration-500 cursor-hover"
+            className="border border-white text-white px-8 py-4 uppercase tracking-wider text-sm font-sans hover:bg-white hover:text-[#21291a] transition-all duration-500 cursor-hover"
           >
             Book Free Consultation
           </button>

@@ -36,12 +36,12 @@ export function NavBar() {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#F9F5F0]/90 backdrop-blur-md border-b border-[#2C2C2C]/10 py-4"
+          ? "bg-[#21291a]/95 backdrop-blur-md border-b border-white/10 py-4"
           : "bg-transparent py-6"
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <Link href="/" className={`font-serif text-2xl tracking-wide cursor-hover ${isScrolled ? "text-[#2C2C2C]" : "text-white"}`}>
+        <Link href="/" className={`font-serif text-2xl tracking-wide cursor-hover ${isScrolled ? "text-[#f5f2ed]" : "text-white"}`}>
           Nivora Interiors
         </Link>
 
@@ -55,9 +55,9 @@ export function NavBar() {
               href={link.href}
               className={`font-sans text-sm uppercase tracking-[0.15em] transition-colors relative cursor-hover ${
                 isScrolled
-                  ? "text-[#2C2C2C] hover:text-[#C4856A]"
+                  ? "text-[#f5f2ed]/80 hover:text-[#a18661]"
                   : "text-white/80 hover:text-white"
-              } ${isActive ? "after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[1px] after:bg-[#C4856A] after:transition-all" : ""}`}
+              } ${isActive ? "after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[1px] after:bg-[#a18661] after:transition-all" : ""}`}
             >
               {link.name}
             </Link>
@@ -68,7 +68,7 @@ export function NavBar() {
         {/* Mobile Toggle */}
         <button
           className={`md:hidden p-2 -mr-2 cursor-hover ${
-            isScrolled ? "text-[#2C2C2C]" : "text-white"
+            isScrolled ? "text-[#f5f2ed]" : "text-white"
           }`}
           onClick={() => setIsMobileMenuOpen(true)}
           aria-label="Open menu"
@@ -84,10 +84,10 @@ export function NavBar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 bg-[#F9F5F0] z-50 flex flex-col pt-24 px-6 pb-6"
+            className="fixed inset-0 bg-[#21291a] z-50 flex flex-col pt-24 px-6 pb-6"
           >
             <button
-              className="absolute top-6 right-6 p-2 text-[#2C2C2C] cursor-hover"
+              className="absolute top-6 right-6 p-2 text-[#f5f2ed] cursor-hover"
               onClick={() => setIsMobileMenuOpen(false)}
               aria-label="Close menu"
             >
@@ -99,7 +99,7 @@ export function NavBar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="font-serif text-3xl text-[#2C2C2C] hover:text-[#C4856A] transition-colors cursor-hover"
+                  className="font-serif text-3xl text-[#f5f2ed] hover:text-[#a18661] transition-colors cursor-hover"
                 >
                   {link.name}
                 </Link>

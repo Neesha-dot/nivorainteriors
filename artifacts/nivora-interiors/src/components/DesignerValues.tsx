@@ -31,13 +31,13 @@ const RIGHT_COLUMN = [
 
 function AccordionItem({ title, body, isOpen, onToggle }: { title: string, body: string, isOpen: boolean, onToggle: () => void }) {
   return (
-    <div className={`mb-4 transition-colors duration-300 ${isOpen ? 'bg-[#F5EFE8] border-l-2 border-[#C4856A]' : 'bg-[#F0ECE6]'}`}>
+    <div className={`mb-4 transition-colors duration-300 ${isOpen ? 'bg-[#F5EFE8] border-l-2 border-[#a18661]' : 'bg-[#f5f2ed]'}`}>
       <button 
         className="w-full px-6 py-5 flex items-center justify-between text-left cursor-hover"
         onClick={onToggle}
       >
-        <span className="font-sans text-sm md:text-base font-medium tracking-wider uppercase text-[#2C2C2C]">{title}</span>
-        {isOpen ? <Minus size={20} className="text-[#C4856A]" /> : <Plus size={20} className="text-[#2C2C2C]/50" />}
+        <span className="font-sans text-sm md:text-base font-medium tracking-wider uppercase text-[#21291a]">{title}</span>
+        {isOpen ? <Minus size={20} className="text-[#a18661]" /> : <Plus size={20} className="text-[#21291a]/50" />}
       </button>
       <AnimatePresence>
         {isOpen && (
@@ -48,7 +48,7 @@ function AccordionItem({ title, body, isOpen, onToggle }: { title: string, body:
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <div className="px-6 pb-6 text-[#2C2C2C]/70 font-sans leading-relaxed">
+            <div className="px-6 pb-6 text-[#21291a]/70 font-sans leading-relaxed">
               {body}
             </div>
           </motion.div>
@@ -67,7 +67,7 @@ export function DesignerValues() {
   });
 
   return (
-    <section className="py-24 md:py-32 bg-[#F9F5F0]" ref={ref}>
+    <section className="py-24 md:py-32 bg-[#f5f2ed]" ref={ref}>
       <div className="container mx-auto px-6 md:px-12 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -75,8 +75,8 @@ export function DesignerValues() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-serif text-4xl md:text-5xl text-[#2C2C2C] mb-4">What It Means To Be A Designer.</h2>
-          <p className="font-sans text-sm uppercase tracking-widest text-[#C4856A]">These Are The Values We Stand For:</p>
+          <h2 className="font-serif text-4xl md:text-5xl text-[#21291a] mb-4">What It Means To Be A Designer.</h2>
+          <p className="font-sans text-sm uppercase tracking-widest text-[#a18661]">These Are The Values We Stand For:</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">

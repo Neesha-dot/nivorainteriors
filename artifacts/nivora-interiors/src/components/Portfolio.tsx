@@ -37,8 +37,8 @@ export function Portfolio() {
                   onClick={() => setFilter(cat)}
                   className={`font-sans text-sm uppercase tracking-widest transition-colors cursor-hover ${
                     filter === cat 
-                      ? "text-[#C4856A] border-b border-[#C4856A]" 
-                      : "text-[#2C2C2C]/50 hover:text-[#2C2C2C]"
+                      ? "text-[#a18661] border-b border-[#a18661]" 
+                      : "text-[#21291a]/50 hover:text-[#21291a]"
                   }`}
                 >
                   {cat}
@@ -69,20 +69,20 @@ export function Portfolio() {
                         alt={project.title}
                         className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-[#2C2C2C]/80 p-8 flex flex-col justify-end translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10">
+                      <div className="absolute inset-0 bg-[#21291a]/80 p-8 flex flex-col justify-end translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10">
                         <h3 className="text-white font-serif text-2xl mb-1">{project.title}</h3>
                         <p className="text-white/70 font-sans text-xs uppercase tracking-widest">
                           {project.location}
                         </p>
                       </div>
                       {project.isNew && (
-                        <div className="absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-sm text-[#2C2C2C] text-xs uppercase tracking-widest px-3 py-1 font-sans">
+                        <div className="absolute top-4 left-4 z-20 bg-white/90 backdrop-blur-sm text-[#21291a] text-xs uppercase tracking-widest px-3 py-1 font-sans">
                           New
                         </div>
                       )}
                     </div>
-                    <h3 className="font-serif text-3xl text-[#2C2C2C] mb-2">{project.title}</h3>
-                    <p className="font-sans text-sm uppercase tracking-widest text-[#2C2C2C]/60">
+                    <h3 className="font-serif text-3xl text-[#21291a] mb-2">{project.title}</h3>
+                    <p className="font-sans text-sm uppercase tracking-widest text-[#21291a]/60">
                       {project.style} — {project.location}
                     </p>
                   </Link>

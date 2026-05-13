@@ -63,14 +63,14 @@ export function ExitIntentPopup() {
           >
             <button
               onClick={handleDismiss}
-              className="absolute top-4 right-4 p-2 text-[#2C2C2C]/50 hover:text-[#2C2C2C] transition-colors"
+              className="absolute top-4 right-4 p-2 text-[#21291a]/50 hover:text-[#21291a] transition-colors"
             >
               <X size={20} />
             </button>
 
-            <div className="text-[#C4856A] font-sans text-xs uppercase tracking-widest mb-3">Wait — Before You Go</div>
-            <h2 className="font-serif text-2xl text-[#2C2C2C] mb-3">Let us show you what we can do with your space.</h2>
-            <p className="font-sans text-[#2C2C2C]/70 text-sm mb-6">
+            <div className="text-[#a18661] font-sans text-xs uppercase tracking-widest mb-3">Wait — Before You Go</div>
+            <h2 className="font-serif text-2xl text-[#21291a] mb-3">Let us show you what we can do with your space.</h2>
+            <p className="font-sans text-[#21291a]/70 text-sm mb-6">
               Get a free moodboard designed for your home — no commitment, just inspiration.
             </p>
 
@@ -80,11 +80,11 @@ export function ExitIntentPopup() {
                 placeholder="Your Phone Number"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full border border-[#2C2C2C]/20 py-3 px-4 font-sans text-[#2C2C2C] focus:outline-none focus:border-[#C4856A] transition-colors"
+                className="w-full border border-[#21291a]/20 py-3 px-4 font-sans text-[#21291a] focus:outline-none focus:border-[#a18661] transition-colors"
               />
               <button
                 onClick={handleSubmit}
-                className="w-full bg-[#C4856A] text-white py-4 font-sans text-sm uppercase tracking-wider hover:bg-[#B3745A] transition-colors"
+                className="w-full bg-[#a18661] text-white py-4 font-sans text-sm uppercase tracking-wider hover:bg-[#21291a] transition-colors"
               >
                 Send Me a Free Moodboard
               </button>

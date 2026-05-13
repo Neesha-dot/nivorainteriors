@@ -28,11 +28,11 @@ export function CustomCursor() {
       
       if (ringRef.current) {
         if (isHoverable) {
-          ringRef.current.classList.add('w-16', 'h-16', 'bg-[#C4856A]/20', 'border-transparent');
-          ringRef.current.classList.remove('w-10', 'h-10', 'border-[#C4856A]');
+          ringRef.current.classList.add('w-16', 'h-16', 'bg-[#a18661]/20', 'border-transparent');
+          ringRef.current.classList.remove('w-10', 'h-10', 'border-[#a18661]');
         } else {
-          ringRef.current.classList.remove('w-16', 'h-16', 'bg-[#C4856A]/20', 'border-transparent');
-          ringRef.current.classList.add('w-10', 'h-10', 'border-[#C4856A]');
+          ringRef.current.classList.remove('w-16', 'h-16', 'bg-[#a18661]/20', 'border-transparent');
+          ringRef.current.classList.add('w-10', 'h-10', 'border-[#a18661]');
         }
       }
     };
@@ -64,12 +64,12 @@ export function CustomCursor() {
     <>
       <div 
         ref={dotRef} 
-        className="fixed top-0 left-0 w-2 h-2 bg-[#2C2C2C] rounded-full pointer-events-none z-[9999] transition-transform duration-75 ease-out"
+        className="fixed top-0 left-0 w-2 h-2 bg-[#21291a] rounded-full pointer-events-none z-[9999] transition-transform duration-75 ease-out"
         style={{ willChange: 'transform' }}
       />
       <div 
         ref={ringRef}
-        className="fixed top-0 left-0 w-10 h-10 border-[1.5px] border-[#C4856A] rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out"
+        className="fixed top-0 left-0 w-10 h-10 border-[1.5px] border-[#a18661] rounded-full pointer-events-none z-[9998] transition-all duration-300 ease-out"
         style={{ willChange: 'transform' }}
       />
     </>

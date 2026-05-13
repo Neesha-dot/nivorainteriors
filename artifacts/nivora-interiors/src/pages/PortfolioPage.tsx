@@ -9,10 +9,10 @@ export function PortfolioPage() {
       transition={{ duration: 0.6 }}
       className="flex flex-col w-full pt-24"
     >
-      <div className="bg-[#F9F5F0] py-32 text-center">
+      <div className="bg-[#f5f2ed] py-32 text-center">
         <div className="container mx-auto px-6">
-          <h1 className="font-serif text-5xl md:text-6xl text-[#2C2C2C] mb-6">Our Work</h1>
-          <p className="font-sans text-[#2C2C2C]/70 text-lg max-w-2xl mx-auto">Every project tells a story. Here are ours.</p>
+          <h1 className="font-serif text-5xl md:text-6xl text-[#21291a] mb-6">Our Work</h1>
+          <p className="font-sans text-[#21291a]/70 text-lg max-w-2xl mx-auto">Every project tells a story. Here are ours.</p>
         </div>
       </div>
       <Portfolio />

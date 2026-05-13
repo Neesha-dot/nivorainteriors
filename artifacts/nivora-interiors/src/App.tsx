@@ -51,7 +51,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Router>
-          <div className="min-h-screen bg-[#F9F5F0] text-[#2C2C2C] selection:bg-[#C4856A] selection:text-white font-sans relative">
+          <div className="min-h-screen bg-[#f5f2ed] text-[#21291a] selection:bg-[#a18661] selection:text-white font-sans relative">
             <ScrollToTop />
             <IntroOverlay onComplete={() => setIntroComplete(true)} />
             <CustomCursor />

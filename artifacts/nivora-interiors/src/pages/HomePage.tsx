@@ -21,13 +21,13 @@ export function HomePage({ introComplete }: { introComplete: boolean }) {
       <Hero introComplete={introComplete} />
       
       {/* Trust Bar */}
-      <div className="bg-white py-4 border-b border-[#2C2C2C]/10">
+      <div className="bg-white py-4 border-b border-[#21291a]/10">
         <div className="container mx-auto px-6 max-w-7xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x divide-[#2C2C2C]/10 text-center">
-            <div className="font-sans text-[#2C2C2C] uppercase tracking-wider text-xs md:text-sm">50+ Projects Completed</div>
-            <div className="font-sans text-[#2C2C2C] uppercase tracking-wider text-xs md:text-sm">7 Years Experience</div>
-            <div className="font-sans text-[#2C2C2C] uppercase tracking-wider text-xs md:text-sm">Mumbai's Trusted Studio</div>
-            <div className="font-sans text-[#2C2C2C] uppercase tracking-wider text-xs md:text-sm">Free First Consultation</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0 md:divide-x divide-[#21291a]/10 text-center">
+            <div className="font-sans text-[#21291a] uppercase tracking-wider text-xs md:text-sm">50+ Projects Completed</div>
+            <div className="font-sans text-[#21291a] uppercase tracking-wider text-xs md:text-sm">7 Years Experience</div>
+            <div className="font-sans text-[#21291a] uppercase tracking-wider text-xs md:text-sm">Mumbai's Trusted Studio</div>
+            <div className="font-sans text-[#21291a] uppercase tracking-wider text-xs md:text-sm">Free First Consultation</div>
           </div>
         </div>
       </div>

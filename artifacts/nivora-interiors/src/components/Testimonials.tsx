@@ -45,20 +45,20 @@ function TestimonialCard({ t, index, inView }: any) {
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.8, delay: index * 0.2 }}
-      className="flex flex-col items-center text-center px-8 py-10 border border-[#2C2C2C]/10 hover:border-[#C4856A]/30 transition-colors duration-300 bg-white"
+      className="flex flex-col items-center text-center px-8 py-10 border border-[#21291a]/10 hover:border-[#a18661]/30 transition-colors duration-300 bg-white"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ ...tiltStyle, transition: "transform 0.3s ease-out" }}
     >
-      <span className="font-serif text-6xl text-[#C4856A] opacity-40 leading-none mb-4">"</span>
-      <p className="font-serif italic text-xl md:text-2xl text-[#2C2C2C] leading-relaxed mb-8 flex-1">
+      <span className="font-serif text-6xl text-[#a18661] opacity-40 leading-none mb-4">"</span>
+      <p className="font-serif italic text-xl md:text-2xl text-[#21291a] leading-relaxed mb-8 flex-1">
         {t.text}
       </p>
       <div>
-        <p className="font-sans font-medium uppercase tracking-widest text-[#2C2C2C] text-sm mb-1">
+        <p className="font-sans font-medium uppercase tracking-widest text-[#21291a] text-sm mb-1">
           {t.author}
         </p>
-        <p className="font-sans text-xs text-[#2C2C2C]/50 uppercase tracking-wider">
+        <p className="font-sans text-xs text-[#21291a]/50 uppercase tracking-wider">
           {t.project}
         </p>
       </div>
@@ -73,7 +73,7 @@ export function Testimonials() {
   });
 
   return (
-    <section className="py-24 md:py-32 bg-[#F9F5F0]" ref={ref}>
+    <section className="py-24 md:py-32 bg-[#f5f2ed]" ref={ref}>
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -81,7 +81,7 @@ export function Testimonials() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16 md:mb-24"
         >
-          <AnimatedHeading text="What Our Clients Say" className="font-serif text-4xl md:text-5xl text-[#2C2C2C]" />
+          <AnimatedHeading text="What Our Clients Say" className="font-serif text-4xl md:text-5xl text-[#21291a]" />
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

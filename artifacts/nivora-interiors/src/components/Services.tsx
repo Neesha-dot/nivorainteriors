@@ -48,7 +48,7 @@ export function Services({ homePreview = false }: { homePreview?: boolean }) {
   const displayServices = homePreview ? SERVICES.slice(0, 4) : SERVICES;
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-[#F9F5F0]" ref={ref}>
+    <section id="services" className="py-24 md:py-32 bg-[#f5f2ed]" ref={ref}>
       <div className="container mx-auto px-6 md:px-12 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -56,17 +56,17 @@ export function Services({ homePreview = false }: { homePreview?: boolean }) {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center md:text-left"
         >
-          <AnimatedHeading text="What We Do" className="font-serif text-4xl md:text-5xl text-[#2C2C2C]" />
+          <AnimatedHeading text="What We Do" className="font-serif text-4xl md:text-5xl text-[#21291a]" />
         </motion.div>
 
-        <div className="flex flex-col border-t border-[#2C2C2C]/10">
+        <div className="flex flex-col border-t border-[#21291a]/10">
           {displayServices.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, x: -20 }}
               animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-[#2C2C2C]/10 hover:bg-white/50 transition-colors px-4 -mx-4 md:px-6 md:-mx-6 ${!homePreview ? "cursor-pointer cursor-hover" : ""}`}
+              className={`group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-[#21291a]/10 hover:bg-white/50 transition-colors px-4 -mx-4 md:px-6 md:-mx-6 ${!homePreview ? "cursor-pointer cursor-hover" : ""}`}
               onClick={() => {
                 if (!homePreview) {
                   navigate("/contact");
@@ -74,14 +74,14 @@ export function Services({ homePreview = false }: { homePreview?: boolean }) {
               }}
             >
               <div className="flex-1 mb-2 md:mb-0">
-                <h3 className="font-serif text-2xl text-[#2C2C2C] group-hover:text-[#C4856A] transition-colors">{service.title}</h3>
+                <h3 className="font-serif text-2xl text-[#21291a] group-hover:text-[#a18661] transition-colors">{service.title}</h3>
               </div>
               {!homePreview && (
                 <>
                   <div className="flex-1 md:text-right pr-4 md:pr-12">
-                    <p className="font-sans text-[#2C2C2C]/60 text-sm md:text-base">{service.description}</p>
+                    <p className="font-sans text-[#21291a]/60 text-sm md:text-base">{service.description}</p>
                   </div>
-                  <div className="hidden md:block opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all text-[#C4856A] font-sans text-sm uppercase tracking-wider">
+                  <div className="hidden md:block opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all text-[#a18661] font-sans text-sm uppercase tracking-wider">
                     Enquire →
                   </div>
                 </>
@@ -99,9 +99,9 @@ export function Services({ homePreview = false }: { homePreview?: boolean }) {
           >
             <Link
               href="/services"
-              className="group flex items-center gap-2 text-[#C4856A] font-sans font-medium uppercase tracking-wider text-sm cursor-hover"
+              className="group flex items-center gap-2 text-[#a18661] font-sans font-medium uppercase tracking-wider text-sm cursor-hover"
             >
-              <span className="border-b border-[#C4856A] pb-0.5 group-hover:border-transparent transition-colors">See All Services</span>
+              <span className="border-b border-[#a18661] pb-0.5 group-hover:border-transparent transition-colors">See All Services</span>
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
           </motion.div>
@@ -110,7 +110,7 @@ export function Services({ homePreview = false }: { homePreview?: boolean }) {
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-center text-[#2C2C2C]/50 italic font-serif mt-12"
+            className="text-center text-[#21291a]/50 italic font-serif mt-12"
           >
             Pricing starting from ₹2,50,000 or custom quote on request
           </motion.p>
