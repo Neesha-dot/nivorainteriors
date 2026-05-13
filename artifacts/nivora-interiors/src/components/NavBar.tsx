@@ -41,8 +41,8 @@ export function NavBar() {
       }`}
     >
       <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
-        <Link href="/" className={`font-serif text-2xl tracking-wide cursor-hover ${isScrolled ? "text-[#f5f2ed]" : "text-white"}`}>
-          Nivora Interiors
+        <Link href="/" className="cursor-hover flex items-center">
+          <img src="/logo.png" alt="Nivora Interiors" className="nav-logo" />
         </Link>
 
         {/* Desktop Nav */}

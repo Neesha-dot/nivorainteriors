@@ -13,8 +13,8 @@ export function Footer() {
           
           {/* Brand */}
           <div className="flex flex-col items-start md:items-start">
-            <Link href="/" onClick={scrollToTop} className="font-serif text-3xl mb-4 text-white cursor-hover">
-              Nivora Interiors
+            <Link href="/" onClick={scrollToTop} className="mb-4 cursor-hover inline-block">
+              <img src="/logo.png" alt="Nivora Interiors" style={{ height: "60px", width: "auto", filter: "brightness(0) invert(1)" }} />
             </Link>
             <p className="font-sans text-white/60 text-sm italic">
               From Vision to Execution
