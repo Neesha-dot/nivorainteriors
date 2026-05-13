@@ -53,7 +53,7 @@ export function NavBar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`font-sans text-sm uppercase tracking-[0.15em] transition-colors relative cursor-hover ${
+              className={`font-sans uppercase transition-colors relative cursor-hover ${
                 isScrolled
                   ? "text-[#f5f2ed]/80 hover:text-[#a18661]"
                   : "text-white/80 hover:text-white"

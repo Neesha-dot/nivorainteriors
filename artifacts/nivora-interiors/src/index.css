@@ -83,6 +83,8 @@
   --app-font-sans: 'Jost', sans-serif;
   --app-font-serif: 'Cormorant Garamond', serif;
   --app-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Jost', sans-serif;
   --radius: 0.25rem;
 
   --tracking-normal: 0em;
@@ -160,5 +162,22 @@
   .nav-logo {
     height: 40px;
   }
+}
+
+nav a, .nav-link {
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+}
+
+.section-heading {
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 400;
+  font-family: var(--font-display);
 }
 
