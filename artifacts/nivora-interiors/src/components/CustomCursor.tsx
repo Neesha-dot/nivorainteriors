@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
@@ -6,6 +6,7 @@ export function CustomCursor() {
   const requestRef = useRef<number>(0);
   const mouse = useRef({ x: 0, y: 0 });
   const pos = useRef({ x: 0, y: 0 });
+  const [trail, setTrail] = useState<{x: number, y: number, id: number}[]>([]);
 
   useEffect(() => {
     // Only render on non-touch devices
@@ -18,6 +19,11 @@ export function CustomCursor() {
       mouse.current.x = e.clientX;
       mouse.current.y = e.clientY;
       
+      setTrail(prev => {
+        const next = [...prev, { x: e.clientX, y: e.clientY, id: Date.now() }];
+        return next.slice(-8);
+      });
+
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
       }
@@ -62,6 +68,26 @@ export function CustomCursor() {
 
   return (
     <>
+      {trail.map((point, index) => {
+        const age = index / trail.length; // 0 = oldest, 1 = newest
+        const opacity = age * 0.5;
+        const size = 2 + age * 2; // 2px to 4px
+        return (
+          <div
+            key={point.id}
+            className="fixed top-0 left-0 rounded-full pointer-events-none"
+            style={{
+              width: `${size}px`,
+              height: `${size}px`,
+              background: "#a18661",
+              opacity,
+              transform: `translate3d(${point.x}px, ${point.y}px, 0) translate(-50%, -50%)`,
+              zIndex: 9997,
+              transition: "opacity 0.6s ease",
+            }}
+          />
+        );
+      })}
       <div 
         ref={dotRef} 
         className="fixed top-0 left-0 w-2 h-2 bg-[#21291a] rounded-full pointer-events-none z-[9999] transition-transform duration-75 ease-out"

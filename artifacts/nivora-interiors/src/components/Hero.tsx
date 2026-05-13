@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { useLocation } from "wouter";
+import { MagneticButton } from "@/components/MagneticButton";
+import { useScrambleText } from "@/hooks/useScrambleText";
 
 export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const [, navigate] = useLocation();
@@ -8,6 +10,8 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   const handleCTA = () => {
     window.open("https://wa.me/919999999999?text=Hi!%20I%20am%20interested%20in%20interior%20design%20services.%20Can%20we%20discuss%20my%20project%3F", "_blank");
   };
+
+  const scrambled = useScrambleText("Spaces That Speak\nYour Story", introComplete, 1500);
 
   return (
     <section id="home" className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden">
@@ -19,6 +23,11 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40 mix-blend-multiply" />
       </div>
+
+      {/* Floating geometric decorations */}
+      <div className="hero-float-1 absolute pointer-events-none z-[1]" style={{ top: "15%", left: "8%" }} />
+      <div className="hero-float-2 absolute pointer-events-none z-[1]" style={{ bottom: "20%", right: "10%" }} />
+      <div className="hero-float-3 absolute pointer-events-none z-[1]" style={{ top: "40%", right: "6%" }} />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center mt-20">
@@ -38,7 +47,9 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
           className="font-serif text-white mb-12 text-center leading-[1.15] mx-auto"
           style={{ fontSize: "clamp(4rem, 7vw, 7rem)", fontWeight: 300, letterSpacing: "0.02em", maxWidth: "860px" }}
         >
-          Spaces That Speak<br />Your Story
+          {scrambled.split("\n").map((line, i) => (
+            <span key={i}>{line}{i < scrambled.split("\n").length - 1 && <br />}</span>
+          ))}
         </motion.h1>
 
         <motion.div
@@ -47,18 +58,18 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col items-center gap-4"
         >
-          <button
+          <MagneticButton
             onClick={handleCTA}
             className="border border-white text-white px-8 py-4 uppercase tracking-wider text-sm font-sans hover:bg-white hover:text-[#21291a] transition-all duration-500 cursor-hover"
           >
             Book Free Consultation
-          </button>
-          <button 
+          </MagneticButton>
+          <MagneticButton 
             onClick={() => navigate("/portfolio")}
             className="text-white/70 text-sm font-sans hover:underline hover:text-white transition-colors cursor-pointer"
           >
             or Explore Our Work →
-          </button>
+          </MagneticButton>
         </motion.div>
       </div>
 

@@ -63,11 +63,11 @@ export function Portfolio() {
                   className="w-full shrink-0"
                 >
                   <Link href={`/projects/${project.slug}`} className="group block cursor-pointer">
-                    <div className="relative aspect-[4/5] w-full overflow-hidden mb-6">
+                    <div className="project-card relative aspect-[4/5] w-full overflow-hidden mb-6">
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-1000"
                       />
                       <div className="absolute inset-0 bg-[#21291a]/80 p-8 flex flex-col justify-end translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-10">
                         <h3 className="text-white font-serif text-2xl mb-1">{project.title}</h3>

@@ -36,7 +36,7 @@ function ProjectCard({ project, index, inView }: any) {
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
         transition={{ duration: 0.8, delay: index * 0.1 }}
-        className="group relative aspect-[4/3] md:aspect-[3/4] overflow-hidden cursor-pointer cursor-hover transition-transform duration-300"
+        className="project-card group relative aspect-[4/3] md:aspect-[3/4] overflow-hidden cursor-pointer cursor-hover transition-transform duration-300"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={tiltStyle}
@@ -44,7 +44,7 @@ function ProjectCard({ project, index, inView }: any) {
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.08]"
+          className="w-full h-full object-cover transition-transform duration-700"
           style={{ transitionTimingFunction: "cubic-bezier(0.25,0.46,0.45,0.94)" }}
         />
         <div 

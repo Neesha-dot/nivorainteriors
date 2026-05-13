@@ -9,6 +9,7 @@ import { InstagramFeed } from "@/components/InstagramFeed";
 import { ContactForm } from "@/components/ContactForm";
 import { HomeAboutSnippet } from "@/components/HomeAboutSnippet";
 import { HomeHowWeWork } from "@/components/HomeHowWeWork";
+import { SectionDivider } from "@/components/SectionDivider";
 
 export function HomePage({ introComplete }: { introComplete: boolean }) {
   return (
@@ -35,6 +36,7 @@ export function HomePage({ introComplete }: { introComplete: boolean }) {
       <MarqueeStrip />
       <HomeAboutSnippet />
       <FeaturedProjects limit={4} showViewAll />
+      <SectionDivider className="container mx-auto px-6 md:px-12 max-w-7xl" />
       <MarqueeStrip />
       <Services homePreview />
       <HomeHowWeWork />

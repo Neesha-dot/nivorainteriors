@@ -53,11 +53,7 @@ export function NavBar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`font-sans uppercase transition-colors relative cursor-hover ${
-                isScrolled
-                  ? "text-[#f5f2ed]/80 hover:text-[#a18661]"
-                  : "text-white/80 hover:text-white"
-              } ${isActive ? "after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[1px] after:bg-[#a18661] after:transition-all" : ""}`}
+              className={"nav-link-animated font-sans uppercase transition-colors relative cursor-hover " + (isScrolled ? "text-[#f5f2ed]/80 hover:text-[#a18661]" : "text-white/80 hover:text-white") + (isActive ? " active" : "")}
             >
               {link.name}
             </Link>

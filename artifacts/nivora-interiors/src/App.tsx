@@ -15,6 +15,8 @@ import { PopupLeadForm } from "@/components/PopupLeadForm";
 import { StickyCTA } from "@/components/StickyCTA";
 import { IntroOverlay } from "@/components/IntroOverlay";
 import { CustomCursor } from "@/components/CustomCursor";
+import { PageTransition } from "@/components/PageTransition";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 import { HomePage } from "./pages/HomePage";
 import { PortfolioPage } from "./pages/PortfolioPage";
@@ -52,9 +54,11 @@ function App() {
       <TooltipProvider>
         <Router>
           <div className="min-h-screen bg-[#f5f2ed] text-[#21291a] selection:bg-[#a18661] selection:text-white font-sans relative">
+            <PageTransition />
             <ScrollToTop />
             <IntroOverlay onComplete={() => setIntroComplete(true)} />
             <CustomCursor />
+            <ScrollProgress />
 
             <AnnouncementBanner />
             <NavBar />

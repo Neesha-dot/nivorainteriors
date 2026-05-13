@@ -1,0 +1,144 @@
+A. MAGNETIC BUTTON EFFECT
+All CTA buttons should have a magnetic pull effect — when mouse gets close, button slightly moves towards cursor:
+
+buttons.forEach(btn => {
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = 'translate(0, 0)';
+    btn.style.transition = 'transform 0.5s ease';
+  });
+});
+
+
+B. TEXT SCRAMBLE EFFECT on hero headline
+When page loads, headline letters scramble randomly then settle into the real text — like a decoding effect:
+
+Apply to: "Spaces That Speak Your Story"
+Characters cycle through random letters before landing on correct ones
+Duration: 1.5 seconds total
+Use characters: ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
+
+
+C. IMAGE DISTORTION on project cards (hover)
+When hovering over project cards, image appears to ripple/distort slightly using CSS filter:
+
+.project-card:hover img {
+  filter: brightness(0.85) contrast(1.05);
+  transform: scale(1.06);
+  transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+D. SMOOTH LINE DRAWING ANIMATION on section dividers
+Thin horizontal lines between sections animate from width 0 to full width when scrolled into view:
+
+.section-divider {
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width 1.2s ease;
+}
+.section-divider.in-view {
+  width: 100%;
+}
+Use IntersectionObserver to add .in-view class when divider enters viewport
+
+
+E. FLOATING ELEMENTS on hero section
+Add 2-3 very subtle geometric shapes (thin circles or lines) that float slowly in the hero background:
+
+<div class="hero-float-1"></div>
+<div class="hero-float-2"></div>
+
+.hero-float-1 {
+  position: absolute;
+  width: 300px; height: 300px;
+  border: 1px solid rgba(161, 134, 97, 0.15);
+  border-radius: 50%;
+  animation: float1 8s ease-in-out infinite;
+}
+
+@keyframes float1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(20px, -30px) rotate(10deg); }
+}
+
+
+F. GOLD UNDERLINE HOVER on all navigation links
+On hover, a thin gold line draws itself under the nav link from left to right:
+
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-gold);
+  transition: width 0.4s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+
+G. PAGE TRANSITION between pages
+When clicking any internal link, the page fades out to cream colour, then new page fades in:
+
+Before navigating: overlay div fades in (opacity 0 → 1, cream background)
+On new page load: overlay fades out (opacity 1 → 0)
+Duration: 0.4s each way
+
+Add overlay div at top of body:
+<div id="page-transition-overlay"></div>
+
+CSS:
+#page-transition-overlay {
+  position: fixed; inset: 0;
+  background: var(--color-cream);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+
+H. CURSOR TRAIL of gold dots
+As cursor moves across the page, it leaves a short trail of tiny fading gold dots:
+
+Track last 8 mouse positions
+Each dot: 4px circle, gold colour (#a18661), fades out over 0.6s
+Creates a magical, premium feel
+Only on desktop (skip on touch devices)
+
+
+I. SCROLL PROGRESS BAR
+Thin gold line at the very top of the page (below announcement banner) that fills from left to right as user scrolls down:
+
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--color-gold);
+  z-index: 9999;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+window.addEventListener('scroll', () => {
+  const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('scroll-progress').style.width = scrolled + '%';
+});
+
+
+J. BEFORE/AFTER SLIDER on About or Services page
+A before/after image comparison slider showing a room before and after Nivora's design:
+
+Vertical divider line in the middle
+User drags left or right to reveal before/after
+"Before" label on left, "After" label on right
+Gold coloured drag handle in the centre
