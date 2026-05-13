@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { ALL_PROJECTS } from "@/data/projects";
 
 const STYLE_FILTERS = ["All", "Modern", "Minimalist", "Traditional", "Contemporary", "Eclectic", "Vastu-Inspired"];
