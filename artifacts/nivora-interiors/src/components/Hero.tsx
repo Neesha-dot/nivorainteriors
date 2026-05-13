@@ -16,13 +16,15 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
   return (
     <section id="home" className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=85")' }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/40 mix-blend-multiply" />
-      </div>
+      />
+      {/* Dark green gradient overlay */}
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{ background: "linear-gradient(to right, rgba(33,41,26,0.78) 0%, rgba(33,41,26,0.32) 100%)" }}
+      />
 
       {/* Floating geometric decorations */}
       <div className="hero-float-1 absolute pointer-events-none z-[1]" style={{ top: "15%", left: "8%" }} />
@@ -31,44 +33,50 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center mt-20">
+        {/* Label tag */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-sans text-sm md:text-base uppercase tracking-[0.2em] text-white/90 mb-6"
+          className="font-sans uppercase mb-6 tracking-[0.2em]"
+          style={{ fontSize: "11px", color: "#a18661", letterSpacing: "0.2em" }}
         >
           Interior Design Studio — Mumbai, India
         </motion.p>
-        
+
+        {/* Main headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="font-serif text-white mb-12 text-center leading-[1.15] mx-auto"
-          style={{ fontSize: "clamp(4rem, 7vw, 7rem)", fontWeight: 300, letterSpacing: "0.02em", maxWidth: "860px" }}
+          className="font-serif mb-12 text-center leading-[1.15] mx-auto"
+          style={{ fontSize: "clamp(4rem, 7vw, 7rem)", fontWeight: 300, letterSpacing: "0.02em", maxWidth: "860px", color: "#f5f2ed" }}
         >
           {scrambled.split("\n").map((line, i) => (
             <span key={i}>{line}{i < scrambled.split("\n").length - 1 && <br />}</span>
           ))}
         </motion.h1>
 
+        {/* CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col items-center gap-4"
+          className="flex flex-col items-center gap-5"
         >
           <MagneticButton
             onClick={handleCTA}
-            className="border border-white text-white px-8 py-4 uppercase tracking-wider text-sm font-sans hover:bg-white hover:text-[#21291a] transition-all duration-500 cursor-hover"
+            className="hero-primary-btn px-10 py-4 font-sans uppercase tracking-wider cursor-hover"
+            style={{ fontSize: "13px", letterSpacing: "0.12em" }}
           >
             Book Free Consultation
           </MagneticButton>
-          <MagneticButton 
+          <MagneticButton
             onClick={() => navigate("/portfolio")}
-            className="text-white/70 text-sm font-sans hover:underline hover:text-white transition-colors cursor-pointer"
+            className="hero-secondary-btn font-sans cursor-hover"
+            style={{ fontSize: "13px", letterSpacing: "0.08em", color: "#a18661" }}
           >
-            or Explore Our Work →
+            Explore Our Work →
           </MagneticButton>
         </motion.div>
       </div>

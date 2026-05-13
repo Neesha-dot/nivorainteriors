@@ -6,6 +6,7 @@ export function CustomCursor() {
   const requestRef = useRef<number>(0);
   const mouse = useRef({ x: 0, y: 0 });
   const pos = useRef({ x: 0, y: 0 });
+  const counter = useRef<number>(0);
   const [trail, setTrail] = useState<{x: number, y: number, id: number}[]>([]);
 
   useEffect(() => {
@@ -20,7 +21,8 @@ export function CustomCursor() {
       mouse.current.y = e.clientY;
       
       setTrail(prev => {
-        const next = [...prev, { x: e.clientX, y: e.clientY, id: Date.now() }];
+        counter.current += 1;
+        const next = [...prev, { x: e.clientX, y: e.clientY, id: counter.current }];
         return next.slice(-8);
       });
 
