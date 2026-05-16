@@ -23,7 +23,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
       {/* Dark green gradient overlay */}
       <div
         className="absolute inset-0 z-[1]"
-        style={{ background: "linear-gradient(to right, rgba(33,41,26,0.78) 0%, rgba(33,41,26,0.32) 100%)" }}
+        style={{ background: "linear-gradient(to right, rgba(33,41,26,0.45) 0%, rgba(33,41,26,0.15) 100%)" }}
       />
 
       {/* Floating geometric decorations */}
@@ -50,7 +50,7 @@ export function Hero({ introComplete = true }: { introComplete?: boolean }) {
           animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="font-serif mb-12 text-center leading-[1.15] mx-auto"
-          style={{ fontSize: "clamp(4rem, 7vw, 7rem)", fontWeight: 300, letterSpacing: "0.02em", maxWidth: "860px", color: "#f5f2ed" }}
+          style={{ fontSize: "clamp(4rem, 7vw, 7rem)", fontWeight: 300, letterSpacing: "0.02em", maxWidth: "860px", color: "#f5f2ed", textShadow: "0 2px 20px rgba(0,0,0,0.3)" }}
         >
           {scrambled.split("\n").map((line, i) => (
             <span key={i}>{line}{i < scrambled.split("\n").length - 1 && <br />}</span>

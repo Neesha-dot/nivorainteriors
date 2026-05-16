@@ -27,7 +27,7 @@ export function PopupLeadForm() {
       const timer = setTimeout(() => {
         setIsOpen(true);
         sessionStorage.setItem("nivoraPopupShown", "true");
-      }, 15000); // 15 seconds
+      }, 20000);
       return () => clearTimeout(timer);
     }
   }, []);
