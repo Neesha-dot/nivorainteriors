@@ -29,11 +29,11 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "PORT=5000 node_modules/.bin/vite --host 0.0.0.0"
+args = "pnpm run dev"
 waitForPort = 5000
 
 [agent]
-stack = "PNPM_WORKSPACE"
+stack = "BEST_EFFORT_FALLBACK"
 expertMode = true
 
 [postMerge]
@@ -46,11 +46,7 @@ externalPort = 3001
 
 [[ports]]
 localPort = 5000
-externalPort = 5000
-
-[[ports]]
-localPort = 8080
-externalPort = 8080
+externalPort = 80
 
 [[ports]]
 localPort = 8081
@@ -59,3 +55,6 @@ externalPort = 80
 [[ports]]
 localPort = 24106
 externalPort = 3000
+
+[nix]
+channel = "stable-25_05"
