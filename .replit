@@ -1,13 +1,5 @@
 modules = ["nodejs-24"]
 
-[deployment]
-router = "application"
-deploymentTarget = "autoscale"
-
-[deployment.postBuild]
-args = ["pnpm", "store", "prune"]
-env = { "CI" = "true" }
-
 [workflows]
 runButton = "Project"
 
@@ -32,25 +24,9 @@ task = "shell.exec"
 args = "fuser -k 5000/tcp 2>/dev/null; pnpm run dev"
 waitForPort = 5000
 
-[agent]
-stack = "BEST_EFFORT_FALLBACK"
-expertMode = true
-
-[postMerge]
-path = "scripts/post-merge.sh"
-timeoutMs = 20000
-
-[[ports]]
-localPort = 3000
-externalPort = 3001
-
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 24106
-externalPort = 3000
 
 [nix]
 channel = "stable-25_05"
