@@ -1,0 +1,100 @@
+import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import { useLocation } from "wouter";
+import { MagneticButton } from "@/components/MagneticButton";
+import { useScrambleText } from "@/hooks/useScrambleText";
+
+export function Hero({ introComplete = true }: { introComplete?: boolean }) {
+  const [, navigate] = useLocation();
+
+  const handleCTA = () => {
+    window.open("https://wa.me/919999999999?text=Hi!%20I%20am%20interested%20in%20interior%20design%20services.%20Can%20we%20discuss%20my%20project%3F", "_blank");
+  };
+
+  const scrambled = useScrambleText("Spaces That Speak\nYour Story", introComplete, 1500);
+
+  return (
+    <section id="home" className="relative h-[100dvh] w-full flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1920&q=85")' }}
+      />
+      {/* Dark green gradient overlay */}
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{ background: "linear-gradient(to right, rgba(33,41,26,0.45) 0%, rgba(33,41,26,0.15) 100%)" }}
+      />
+
+      {/* Floating geometric decorations */}
+      <div className="hero-float-1 absolute pointer-events-none z-[1]" style={{ top: "15%", left: "8%" }} />
+      <div className="hero-float-2 absolute pointer-events-none z-[1]" style={{ bottom: "20%", right: "10%" }} />
+      <div className="hero-float-3 absolute pointer-events-none z-[1]" style={{ top: "40%", right: "6%" }} />
+
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-6 flex flex-col items-center text-center mt-20">
+        {/* Label tag */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="font-sans uppercase mb-6 tracking-[0.2em]"
+          style={{ fontSize: "11px", color: "#a18661", letterSpacing: "0.2em" }}
+        >
+          Interior Design Studio — Mumbai, India
+        </motion.p>
+
+        {/* Main headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="font-serif mb-12 text-center leading-[1.15] mx-auto"
+          style={{ fontSize: "clamp(4rem, 7vw, 7rem)", fontWeight: 300, letterSpacing: "0.02em", maxWidth: "860px", color: "#f5f2ed", textShadow: "0 2px 20px rgba(0,0,0,0.3)" }}
+        >
+          {scrambled.split("\n").map((line, i) => (
+            <span key={i}>{line}{i < scrambled.split("\n").length - 1 && <br />}</span>
+          ))}
+        </motion.h1>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={introComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex flex-col items-center gap-5"
+        >
+          <MagneticButton
+            onClick={handleCTA}
+            className="hero-primary-btn px-10 py-4 font-sans uppercase tracking-wider cursor-hover"
+            style={{ fontSize: "13px", letterSpacing: "0.12em" }}
+          >
+            Book Free Consultation
+          </MagneticButton>
+          <MagneticButton
+            onClick={() => navigate("/portfolio")}
+            className="hero-secondary-btn font-sans cursor-hover"
+            style={{ fontSize: "13px", letterSpacing: "0.08em", color: "#a18661" }}
+          >
+            Explore Our Work →
+          </MagneticButton>
+        </motion.div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={introComplete ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ delay: 1.2, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/70 flex flex-col items-center gap-2"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+        >
+          <ChevronDown size={24} />
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+}

@@ -1,0 +1,231 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SiWhatsapp } from "react-icons/si";
+import { AnimatedHeading } from "./AnimatedHeading";
+
+const formSchema = z.object({
+  fullName: z.string().min(2, "Name must be at least 2 characters"),
+  phone: z.string().min(10, "Please enter a valid phone number"),
+  email: z.string().email("Please enter a valid email address"),
+  city: z.string().min(2, "City is required"),
+  spaceType: z.string().min(1, "Please select a space type"),
+  budget: z.string().min(1, "Please select a budget range"),
+  source: z.string().min(1, "Please tell us how you heard about us"),
+  description: z.string().optional(),
+  callbackTime: z.string().min(1, "Please select a preferred callback time"),
+});
+
+type FormValues = z.infer<typeof formSchema>;
+
+export function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+  });
+
+  const onSubmit = async (data: FormValues) => {
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    console.log("Form submitted:", data);
+    setIsSubmitting(false);
+    setIsSuccess(true);
+    reset();
+    
+    setTimeout(() => setIsSuccess(false), 5000);
+  };
+
+  return (
+    <section id="contact" className="relative z-10 py-24 md:py-32 bg-[#f5f2ed]" ref={ref}>
+      <div className="container mx-auto px-6 md:px-12 max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
+          <AnimatedHeading text="Let's Start Your Project" className="font-serif text-4xl md:text-5xl text-[#21291a] mb-6" />
+          <div className="w-16 h-px bg-[#a18661] mx-auto"></div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          {isSuccess ? (
+            <div className="bg-white p-12 text-center border border-[#a18661]/20 flex flex-col items-center">
+              <h3 className="font-serif text-3xl text-[#21291a] mb-4">Thank you!</h3>
+              <p className="font-sans text-[#21291a]/70 mb-8">We've received your enquiry and will call you back within 24 hours.</p>
+              <a 
+                href="https://wa.me/919999999999?text=Hi!%20I%20just%20submitted%20an%20enquiry%20on%20your%20website."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-[#a18661] text-[#a18661] px-8 py-3 uppercase tracking-wider text-sm font-sans hover:bg-[#a18661] hover:text-white transition-colors"
+              >
+                Or Chat on WhatsApp <SiWhatsapp size={16} />
+              </a>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 bg-white p-8 md:p-12 shadow-sm border border-[#21291a]/5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest text-[#21291a]/70">Full Name *</label>
+                  <input 
+                    {...register("fullName")}
+                    className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none"
+                    placeholder="Jane Doe"
+                  />
+                  {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName.message}</p>}
+                </div>
+                
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest text-[#21291a]/70">Phone Number *</label>
+                  <input 
+                    {...register("phone")}
+                    type="tel"
+                    className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none"
+                    placeholder="+91 98765 43210"
+                  />
+                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest text-[#21291a]/70">Email Address *</label>
+                  <input 
+                    {...register("email")}
+                    type="email"
+                    className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none"
+                    placeholder="jane@example.com"
+                  />
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest text-[#21291a]/70">City *</label>
+                  <input 
+                    {...register("city")}
+                    className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none"
+                    placeholder="Mumbai"
+                  />
+                  {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city.message}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest text-[#21291a]/70">Type of Space *</label>
+                  <select 
+                    {...register("spaceType")}
+                    className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none appearance-none"
+                  >
+                    <option value="">Select a space type</option>
+                    <option value="Living Room">Living Room</option>
+                    <option value="Bedroom">Bedroom</option>
+                    <option value="Kitchen">Kitchen</option>
+                    <option value="Office">Office</option>
+                    <option value="Full Home">Full Home</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Pooja Room">Pooja Room</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {errors.spaceType && <p className="text-red-500 text-xs mt-1">{errors.spaceType.message}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest text-[#21291a]/70">Budget Range *</label>
+                  <select 
+                    {...register("budget")}
+                    className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none appearance-none"
+                  >
+                    <option value="">Select your budget</option>
+                    <option value="Under ₹5 Lakh">Under ₹5 Lakh</option>
+                    <option value="₹5–10 Lakh">₹5–10 Lakh</option>
+                    <option value="₹10–20 Lakh">₹10–20 Lakh</option>
+                    <option value="₹20 Lakh+">₹20 Lakh+</option>
+                    <option value="Not Decided Yet">Not Decided Yet</option>
+                  </select>
+                  {errors.budget && <p className="text-red-500 text-xs mt-1">{errors.budget.message}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest text-[#21291a]/70">How did you hear about us? *</label>
+                  <select 
+                    {...register("source")}
+                    className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none appearance-none"
+                  >
+                    <option value="">Select an option</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Google">Google</option>
+                    <option value="Friend Referral">Friend Referral</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Other">Other</option>
+                  </select>
+                  {errors.source && <p className="text-red-500 text-xs mt-1">{errors.source.message}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label className="font-sans text-xs uppercase tracking-widest text-[#21291a]/70">Preferred Callback Time *</label>
+                  <select 
+                    {...register("callbackTime")}
+                    className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors rounded-none appearance-none"
+                  >
+                    <option value="">Select a time</option>
+                    <option value="Morning">Morning (9AM – 12PM)</option>
+                    <option value="Afternoon">Afternoon (12PM – 4PM)</option>
+                    <option value="Evening">Evening (4PM – 8PM)</option>
+                  </select>
+                  {errors.callbackTime && <p className="text-red-500 text-xs mt-1">{errors.callbackTime.message}</p>}
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="font-sans text-xs uppercase tracking-widest text-[#21291a]/70">Project Description</label>
+                <textarea 
+                  {...register("description")}
+                  rows={4}
+                  className="w-full border-b border-[#21291a]/20 py-2 bg-transparent focus:outline-none focus:border-[#a18661] transition-colors resize-none rounded-none"
+                  placeholder="Tell us a bit about your project, timeline, and vision..."
+                ></textarea>
+              </div>
+
+              <div className="pt-8 flex flex-col items-center gap-6">
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full md:w-auto px-12 py-4 bg-[#a18661] text-white font-sans text-sm uppercase tracking-wider hover:bg-[#21291a] transition-colors disabled:opacity-70 disabled:cursor-not-allowed cursor-hover"
+                >
+                  {isSubmitting ? "Sending..." : "Send Enquiry"}
+                </button>
+
+                <a 
+                  href="https://wa.me/919999999999?text=Hi!%20I'm%20interested%20in%20interior%20design%20services.%20Can%20we%20discuss%20my%20project%3F"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-2 text-[#21291a]/70 hover:text-[#25D366] transition-colors font-sans text-sm cursor-hover"
+                >
+                  Or chat with us on WhatsApp
+                  <SiWhatsapp className="group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </form>
+          )}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
